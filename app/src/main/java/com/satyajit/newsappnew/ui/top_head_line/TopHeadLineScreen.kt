@@ -1,118 +1,77 @@
 package com.satyajit.newsappnew.ui.top_head_line
 
+import android.content.res.Configuration.UI_MODE_NIGHT_NO
+import android.content.res.Configuration.UI_MODE_NIGHT_YES
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material3.Card
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.collectAsState
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import androidx.lifecycle.viewmodel.compose.viewModel
-import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
+import com.satyajit.newsappnew.R
 import com.satyajit.newsappnew.data.model.Article
 import com.satyajit.newsappnew.data.model.Source
-import com.satyajit.newsappnew.di.component.ApplicationComponent
 import com.satyajit.newsappnew.ui.base.UiState
+import com.satyajit.newsappnew.ui.generic.showErrorMessageWithRetry
+import com.satyajit.newsappnew.ui.generic.showLoading
 import com.satyajit.newsappnew.ui.theme.NewsAppNewTheme
-
-@Composable
-fun NewsArticle(article: Article) {
-    Card(
-        modifier = Modifier
-            .wrapContentHeight()
-            .background(color = MaterialTheme.colorScheme.primary)
-    ) {
-        Column(modifier = Modifier.fillMaxWidth()) {
-            AsyncImage(
-                model = ImageRequest.Builder(LocalContext.current)
-                    .data(article.imageUrl)
-                    .crossfade(true)
-                    .build(),
-                contentDescription = "News Thumbnail",
-                contentScale = ContentScale.Crop,
-                modifier = Modifier
-                    .height(150.dp)
-                    .fillMaxWidth()
-                    .background(color = MaterialTheme.colorScheme.tertiary)
-            )
-            Column(modifier = Modifier.padding(horizontal = 6.dp, vertical = 6.dp)) {
-                Text(
-                    text = article.title,
-                    style = MaterialTheme.typography.bodyLarge,
-                    color = MaterialTheme.colorScheme.tertiary
-                )
-                Text(
-                    text = article.description,
-                    style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.tertiary
-                )
-                Text(
-                    text = article.source.name,
-                    style = MaterialTheme.typography.bodySmall,
-                    color = MaterialTheme.colorScheme.tertiary
-                )
-            }
-        }
-    }
-
-}
+import com.satyajit.newsappnew.ui.theme.slightlyDeemphasizedAlpha
+import com.satyajit.newsappnew.ui.theme.stronglyDeemphasizedAlpha
 
 @Composable
 fun TopHeadlineScreen(
-    applicationComponent: ApplicationComponent,
-    navHostController: NavHostController
+    uiState: UiState<List<Article>>,
+    onClickOfNewsITem: (newsUrl: String) -> Unit,
+    onClickOfRetry: () -> Unit
 ) {
+    Surface(modifier = Modifier.background(MaterialTheme.colorScheme.background)) {
+        when (uiState) {
+            is UiState.Loading -> {
+                showLoading()
+            }
 
-    val viewModel : TopHeadLineViewModel = viewModel(factory = applicationComponent.getTopHeadlineViewModelFactory())
+            is UiState.Error -> {
+                showErrorMessageWithRetry(stringResource(id = R.string.error_fetch_news),onClickOfRetry)
+            }
 
-    val uiState = viewModel.uiState.collectAsState().value
-
-    when (uiState) {
-        is UiState.Loading -> {
-
-        }
-
-        is UiState.Error -> {
-
-        }
-
-        is UiState.Success -> {
-            LazyColumn(
-                modifier = Modifier.padding(horizontal = 8.dp),
-                verticalArrangement = Arrangement.spacedBy(8.dp)
-            ) {
-                items(uiState.data) { article ->
-                    NewsArticle(article = article)
+            is UiState.Success -> {
+                LazyColumn(
+                    modifier = Modifier.padding(vertical = 10.dp, horizontal = 10.dp),
+                    verticalArrangement = Arrangement.spacedBy(14.dp)
+                ) {
+                    items(uiState.data) { article ->
+                        NewsArticle(article = article, onClickOfNewsITem)
+                    }
                 }
             }
         }
 
 
     }
-
-
-
 }
 
-
-@Preview(showBackground = true)
+@Preview(showBackground = true, name = "Ui mode Dark", uiMode = UI_MODE_NIGHT_YES)
+@Preview(showBackground = true, name = "Ui mode Light", uiMode = UI_MODE_NIGHT_NO)
 @Composable
-fun GreetingPreview() {
+fun PreviewArticle() {
     NewsAppNewTheme {
         Surface {
             NewsArticle(
@@ -123,7 +82,57 @@ fun GreetingPreview() {
                     imageUrl = "https://images.pexels.com/photos/1535907/pexels-photo-1535907.jpeg?cs=srgb&dl=pexels-karyme-fran%C3%A7a-1535907.jpg&fm=jpg",
                     url = "www.google.come"
                 )
-            )
+            ) {}
         }
     }
 }
+
+
+@Composable
+fun NewsArticle(article: Article, onClickOfNewsITem: (newsUrl: String) -> Unit) {
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .background(MaterialTheme.colorScheme.primaryContainer, MaterialTheme.shapes.medium)
+            .clickable { onClickOfNewsITem(article.url ?: "") }
+    ) {
+        AsyncImage(
+            model = ImageRequest.Builder(LocalContext.current).data(article.imageUrl)
+                .crossfade(true).build(),
+            contentDescription = "News Thumbnail",
+            contentScale = ContentScale.Crop,
+            modifier = Modifier
+                .height(200.dp)
+                .fillMaxWidth()
+                .clip(RoundedCornerShape(topStart = 8.dp, topEnd = 8.dp))
+                .background(
+                    color = MaterialTheme.colorScheme.onSurface,
+                    MaterialTheme.shapes.medium
+                )
+        )
+        Column(modifier = Modifier.padding(horizontal = 14.dp, vertical = 14.dp)) {
+            Text(
+                text = article.title ?: "",
+                style = MaterialTheme.typography.titleLarge,
+                color = MaterialTheme.colorScheme.primary.copy(slightlyDeemphasizedAlpha),
+                maxLines = 2
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+            Text(
+                text = article.description ?: "",
+                style = MaterialTheme.typography.bodyLarge,
+                color = MaterialTheme.colorScheme.onPrimary.copy(stronglyDeemphasizedAlpha),
+                maxLines = 2,
+            )
+            Spacer(modifier = Modifier.height(10.dp))
+            Text(
+                text = article.source?.name ?: "",
+                style = MaterialTheme.typography.labelSmall,
+                color = MaterialTheme.colorScheme.primary.copy(slightlyDeemphasizedAlpha),
+                maxLines = 1
+            )
+        }
+    }
+
+}
+

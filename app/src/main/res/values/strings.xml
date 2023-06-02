@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">NewsAppNew</string>
+    <string name="error_fetch_news">Error in fetching news.</string>
 </resources>

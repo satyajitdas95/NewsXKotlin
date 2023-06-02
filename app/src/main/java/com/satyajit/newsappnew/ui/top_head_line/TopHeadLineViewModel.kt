@@ -1,11 +1,9 @@
 package com.satyajit.newsappnew.ui.top_head_line
 
 import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.satyajit.newsappnew.data.model.Article
 import com.satyajit.newsappnew.data.repository.TopHeadlineRepository
-import com.satyajit.newsappnew.ui.base.NewsData
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -24,7 +22,7 @@ class TopHeadLineViewModel(private val topHeadlineRepository: TopHeadlineReposit
         fetchNews()
     }
 
-    private fun fetchNews() {
+    fun fetchNews() {
         viewModelScope.launch {
             topHeadlineRepository.getTopHeadlines(AppConstant.COUNTRY)
                 .catch { e ->
