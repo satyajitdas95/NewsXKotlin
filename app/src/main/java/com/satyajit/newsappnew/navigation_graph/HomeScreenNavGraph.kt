@@ -7,8 +7,10 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.satyajit.newsappnew.data.local.countryList
+import com.satyajit.newsappnew.data.local.languageList
 import com.satyajit.newsappnew.di.component.ApplicationComponent
 import com.satyajit.newsappnew.ui.country.CountryScreen
+import com.satyajit.newsappnew.ui.languagescreen.LanguageScreen
 import com.satyajit.newsappnew.ui.news_details.NewsDetailsScreen
 import com.satyajit.newsappnew.ui.top_head_line.TopHeadLinesRoute
 
@@ -27,13 +29,13 @@ fun HomeScreenNavGraph(
             )
         }
 
-        composable(HomeNavGraph.DetailsOfNews.route,arguments = listOf(
+        composable(HomeNavGraph.DetailsOfNews.route, arguments = listOf(
             navArgument("newsDetailsUrl") {
                 type = NavType.StringType
             }
         )) {
             val newsUrl = it.arguments?.getString("newsDetailsUrl") ?: ""
-            NewsDetailsScreen(newsUrl)
+            NewsDetailsScreen(newsUrl,navController)
         }
 
         composable(HomeNavGraph.Sources.route) {
@@ -45,28 +47,11 @@ fun HomeScreenNavGraph(
         }
 
         composable(HomeNavGraph.Language.route) {
-
+            LanguageScreen(languageList, onClickOfLanguage = {})
         }
 
 
     }
-
-
-//
-
-//
-//    composable(ROUTE_NEWS_DETAILS) {
-//        val newsUrl = it.arguments?.getString("newsLink")
-//        val intent = CustomTabsIntent.Builder()
-//            .build()
-//        intent.launchUrl(applicationComponent.getContext(), Uri.parse(newsUrl))
-//
-////            NewsDetailsRoute(
-////                newsUrl,
-////                navHostController = navController
-////            )
-//    }
-
 
 }
 

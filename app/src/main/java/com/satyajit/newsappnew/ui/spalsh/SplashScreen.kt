@@ -22,7 +22,7 @@ import kotlinx.coroutines.delay
 
 @Composable
 fun SplashScreen(navHostController: NavHostController, onSplashCompleted: () -> Unit) {
-    val delayDuration by remember { mutableStateOf(1000L) }
+    val delayDuration by remember { mutableStateOf(100L) }
 
     LaunchedEffect(Unit) {
         delay(delayDuration)

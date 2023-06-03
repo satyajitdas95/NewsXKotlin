@@ -2,41 +2,19 @@
 
 package com.satyajit.newsappnew.ui.news_details
 
-import android.annotation.SuppressLint
-import android.app.Activity
 import android.content.ComponentName
-import android.content.Context
-import android.content.Intent
 import android.net.Uri
 import androidx.browser.customtabs.CustomTabsClient
 import androidx.browser.customtabs.CustomTabsIntent
 import androidx.browser.customtabs.CustomTabsServiceConnection
 import androidx.browser.customtabs.CustomTabsSession
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.fillMaxHeight
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material.Text
-import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.Scaffold
-import androidx.compose.material3.Surface
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.unit.dp
-import androidx.core.content.ContextCompat
-import com.satyajit.newsappnew.R
+import androidx.navigation.NavHostController
 
 @Composable
-fun NewsDetailsScreen(newsUrl: String) {
+fun NewsDetailsScreen(newsUrl: String, navController: NavHostController) {
     var newUrl = newsUrl
     if (!newUrl.startsWith("http://") && !newUrl.startsWith("https://")) {
         newUrl = Uri.parse("http://$newUrl").toString()
@@ -67,11 +45,12 @@ fun NewsDetailsScreen(newsUrl: String) {
         mCustomTabsServiceConnection
     )
     val customTabsIntent = CustomTabsIntent.Builder(mCustomTabsSession)
-        //.setToolbarColor(color)
         .setShowTitle(true)
         .build()
 
+
     customTabsIntent.launchUrl(context, Uri.parse(newUrl))
+
 
 }
 

@@ -1,8 +1,7 @@
-package com.satyajit.newsappnew.ui.country
+package com.satyajit.newsappnew.ui.languagescreen
 
 import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
-import android.widget.Space
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
@@ -16,18 +15,12 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.key
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.clip
-import androidx.compose.ui.draw.scale
-import androidx.compose.ui.layout.ScaleFactor
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -35,10 +28,11 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.satyajit.newsappnew.R
 import com.satyajit.newsappnew.data.model.Country
+import com.satyajit.newsappnew.data.model.Language
 
 
 @Composable
-fun CountryScreen(countryList: List<Country>, onClickOfCountry: (countryCode: String) -> Unit) {
+fun LanguageScreen(languageList: List<Language>, onClickOfLanguage: (languageCode: String) -> Unit) {
     Surface(modifier = Modifier.background(MaterialTheme.colorScheme.background)) {
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
@@ -46,8 +40,8 @@ fun CountryScreen(countryList: List<Country>, onClickOfCountry: (countryCode: St
             verticalArrangement = Arrangement.spacedBy(14.dp),
             horizontalArrangement = Arrangement.spacedBy(14.dp)
         ) {
-            items(items = countryList, key = { country -> country.iconID }) { country ->
-                Country(country, onClickOfCountry)
+            items(items = languageList, key = { language -> language.languageCode}) { language ->
+                LanguageItem(language, onClickOfLanguage)
             }
         }
     }
@@ -55,29 +49,28 @@ fun CountryScreen(countryList: List<Country>, onClickOfCountry: (countryCode: St
 
 
 @Composable
-fun Country(country: Country, onClickOfCountry: (countryCode: String) -> Unit) {
+fun LanguageItem(language: Language, onClickOfLanguage: (languageCode: String) -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .height(120.dp)
             .background(MaterialTheme.colorScheme.primaryContainer, MaterialTheme.shapes.medium)
-            .clickable { onClickOfCountry(country.countryCode) },
+            .clickable { onClickOfLanguage(language.languageCode) },
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Image(
-            painter = painterResource(id = country.iconID),
-            contentDescription = country.countryName,
-            modifier = Modifier
-                .width(80.dp)
-                .height(50.dp)
-                .padding(vertical = 6.dp)
+
+        Text(
+            text = language.languageTextOriginal,
+            fontSize = 40.sp,
+            color = MaterialTheme.colorScheme.primary,
+            textAlign = TextAlign.Center
         )
 
         Spacer(modifier = Modifier.height(4.dp))
 
         Text(
-            text = country.countryName,
+            text = language.languageName,
             fontSize = 18.sp,
             color = MaterialTheme.colorScheme.primary,
             textAlign = TextAlign.Center
@@ -90,7 +83,7 @@ fun Country(country: Country, onClickOfCountry: (countryCode: String) -> Unit) {
 @Preview(name = "Dark Mode", uiMode = UI_MODE_NIGHT_YES)
 @Composable
 fun PreviewCountry() {
-    Country(Country(R.drawable.`in`, "India", "in"), {})
+    LanguageItem(Language("English", "English", "in"), {})
 }
 
 

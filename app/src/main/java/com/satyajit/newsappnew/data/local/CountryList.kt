@@ -43,7 +43,7 @@ val countryList = mutableListOf(
     Country(R.drawable.ph, "Philippines","ph"),
     Country(R.drawable.pl, "Poland","pl"),
     Country(R.drawable.pt, "Portugal","pt"),
-    Country(R.drawable.ro, "South Africa","ra"),
+    Country(R.drawable.ro, "South Africa","ro"),
     Country(R.drawable.rs, "Serbia","rs"),
     Country(R.drawable.ru, "Russia","ru"),
     Country(R.drawable.sa, "Saudi Arabia","sa"),
