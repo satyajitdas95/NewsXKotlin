@@ -1,9 +1,9 @@
-package com.satyajit.newsappnew.ui.top_head_line
+package com.satyajit.newsappnew.ui.screen_top_head_line
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.satyajit.newsappnew.data.model.Article
-import com.satyajit.newsappnew.data.repository.TopHeadlineRepository
+import com.satyajit.newsappnew.data.repository.NewsRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -12,7 +12,7 @@ import com.satyajit.newsappnew.ui.base.UiState
 import com.satyajit.newsappnew.utils.AppConstant
 import kotlinx.coroutines.flow.catch
 
-class TopHeadLineViewModel(private val topHeadlineRepository: TopHeadlineRepository) : ViewModel() {
+class TopHeadLineViewModel(private val newsRepository: NewsRepository) : ViewModel() {
 
     private val _uiState = MutableStateFlow<UiState<List<Article>>>(UiState.Loading)
 
@@ -24,7 +24,7 @@ class TopHeadLineViewModel(private val topHeadlineRepository: TopHeadlineReposit
 
     fun fetchNews(countryCode:String) {
         viewModelScope.launch {
-            topHeadlineRepository.getTopHeadlines(countryCode)
+            newsRepository.getTopHeadlines(countryCode)
                 .catch { e ->
                     _uiState.value = UiState.Error(e.toString())
                 }.collect {
@@ -32,11 +32,5 @@ class TopHeadLineViewModel(private val topHeadlineRepository: TopHeadlineReposit
                 }
         }
     }
-
-//    private fun fetchNews() {
-//        viewModelScope.launch {
-//            _uiState.value = UiState.Success(NewsData.listOfArticle)
-//        }
-//    }
 
 }

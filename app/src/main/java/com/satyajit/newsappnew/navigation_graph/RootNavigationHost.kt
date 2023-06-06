@@ -5,8 +5,8 @@ import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import com.satyajit.newsappnew.di.component.ApplicationComponent
-import com.satyajit.newsappnew.ui.home.HomeScreen
-import com.satyajit.newsappnew.ui.spalsh.SplashScreen
+import com.satyajit.newsappnew.ui.screen_home.HomeScreen
+import com.satyajit.newsappnew.ui.screen_spalsh.SplashScreen
 
 @Composable
 fun RootNavHost(applicationComponent: ApplicationComponent, navHostController: NavHostController) {
@@ -24,7 +24,6 @@ fun RootNavHost(applicationComponent: ApplicationComponent, navHostController: N
     }
 
 }
-
 
 sealed class Graphs(val route: String) {
     object SplashScreen : Graphs("splash")

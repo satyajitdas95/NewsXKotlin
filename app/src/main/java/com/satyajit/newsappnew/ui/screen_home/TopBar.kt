@@ -1,30 +1,19 @@
-package com.satyajit.newsappnew.ui.home
+package com.satyajit.newsappnew.ui.screen_home
 
-import androidx.compose.foundation.Image
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.TopAppBar
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountBox
 import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Info
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.MutableState
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
-import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import androidx.navigation.compose.currentBackStackEntryAsState
-import com.satyajit.newsappnew.R
 
 @Composable
 fun TopAppBarComponent(navController: NavController) {
@@ -46,7 +35,6 @@ fun TopAppBarComponent(navController: NavController) {
                 Text(text = "NewsX")
             },
             actions = {
-
                 IconButton(onClick = {}) {
                     Icon(Icons.Default.Search, "Search")
                 }
@@ -58,7 +46,7 @@ fun TopAppBarComponent(navController: NavController) {
     } else {
         TopAppBar(
             title = {
-                Text(text = "NewsX")
+
             },
             navigationIcon = {
                 IconButton(onClick = { navController.popBackStack() }) {

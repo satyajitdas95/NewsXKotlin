@@ -1,4 +1,4 @@
-package com.satyajit.newsappnew.ui.top_head_line
+package com.satyajit.newsappnew.ui.screen_top_head_line
 
 import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
@@ -28,7 +28,7 @@ import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.satyajit.newsappnew.R
 import com.satyajit.newsappnew.data.model.Article
-import com.satyajit.newsappnew.data.model.Source
+import com.satyajit.newsappnew.data.model.Sources
 import com.satyajit.newsappnew.ui.base.UiState
 import com.satyajit.newsappnew.ui.generic.showErrorMessageWithRetry
 import com.satyajit.newsappnew.ui.generic.showLoading
@@ -49,7 +49,10 @@ fun TopHeadlineScreen(
             }
 
             is UiState.Error -> {
-                showErrorMessageWithRetry(stringResource(id = R.string.error_fetch_news),onClickOfRetry)
+                showErrorMessageWithRetry(
+                    stringResource(id = R.string.error_fetch_news),
+                    onClickOfRetry
+                )
             }
 
             is UiState.Success -> {
@@ -78,7 +81,7 @@ fun PreviewArticle() {
                 Article(
                     title = "This is A Test Titel",
                     description = "This is a description title to test if it fits into picture",
-                    source = Source("1", "BBC"),
+                    source = Sources(name = "BBC"),
                     imageUrl = "https://images.pexels.com/photos/1535907/pexels-photo-1535907.jpeg?cs=srgb&dl=pexels-karyme-fran%C3%A7a-1535907.jpg&fm=jpg",
                     url = "www.google.come"
                 )

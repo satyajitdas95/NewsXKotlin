@@ -1,5 +1,6 @@
 package com.satyajit.newsappnew.data.api
 
+import com.satyajit.newsappnew.data.model.AllSourcesResponse
 import com.satyajit.newsappnew.data.model.TopHeadlinesResponse
 import com.satyajit.newsappnew.utils.AppConstant.API_KEY
 import retrofit2.http.GET
@@ -15,4 +16,7 @@ interface NetworkService {
     suspend fun getTopHeadlines(@Query("country") country: String): TopHeadlinesResponse
 
 
+    @Headers("X-Api-Key: $API_KEY")
+    @GET("top-headlines/sources")
+    suspend fun getAllSources(): AllSourcesResponse
 }

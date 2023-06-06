@@ -1,4 +1,4 @@
-package com.satyajit.newsappnew.ui.news_details
+package com.satyajit.newsappnew.ui.screen_news_details
 
 import android.annotation.SuppressLint
 import androidx.compose.foundation.background

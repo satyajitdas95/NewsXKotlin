@@ -1,4 +1,4 @@
-package com.satyajit.newsappnew.ui.home
+package com.satyajit.newsappnew.ui.screen_home
 
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.material.BottomNavigation

@@ -1,4 +1,4 @@
-package com.satyajit.newsappnew.ui.languagescreen
+package com.satyajit.newsappnew.ui.screen_country
 
 import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
@@ -28,11 +28,10 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.satyajit.newsappnew.R
 import com.satyajit.newsappnew.data.model.Country
-import com.satyajit.newsappnew.data.model.Language
 
 
 @Composable
-fun LanguageScreen(languageList: List<Language>, onClickOfLanguage: (languageCode: String) -> Unit) {
+fun CountryScreen(countryList: List<Country>, onClickOfCountry: (countryCode: String) -> Unit) {
     Surface(modifier = Modifier.background(MaterialTheme.colorScheme.background)) {
         LazyVerticalGrid(
             columns = GridCells.Fixed(2),
@@ -40,8 +39,8 @@ fun LanguageScreen(languageList: List<Language>, onClickOfLanguage: (languageCod
             verticalArrangement = Arrangement.spacedBy(14.dp),
             horizontalArrangement = Arrangement.spacedBy(14.dp)
         ) {
-            items(items = languageList, key = { language -> language.languageCode}) { language ->
-                LanguageItem(language, onClickOfLanguage)
+            items(items = countryList, key = { country -> country.iconID }) { country ->
+                Country(country, onClickOfCountry)
             }
         }
     }
@@ -49,28 +48,29 @@ fun LanguageScreen(languageList: List<Language>, onClickOfLanguage: (languageCod
 
 
 @Composable
-fun LanguageItem(language: Language, onClickOfLanguage: (languageCode: String) -> Unit) {
+fun Country(country: Country, onClickOfCountry: (countryCode: String) -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .height(120.dp)
             .background(MaterialTheme.colorScheme.primaryContainer, MaterialTheme.shapes.medium)
-            .clickable { onClickOfLanguage(language.languageCode) },
+            .clickable { onClickOfCountry(country.countryCode) },
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-
-        Text(
-            text = language.languageTextOriginal,
-            fontSize = 40.sp,
-            color = MaterialTheme.colorScheme.primary,
-            textAlign = TextAlign.Center
+        Image(
+            painter = painterResource(id = country.iconID),
+            contentDescription = country.countryName,
+            modifier = Modifier
+                .width(80.dp)
+                .height(50.dp)
+                .padding(vertical = 6.dp)
         )
 
         Spacer(modifier = Modifier.height(4.dp))
 
         Text(
-            text = language.languageName,
+            text = country.countryName,
             fontSize = 18.sp,
             color = MaterialTheme.colorScheme.primary,
             textAlign = TextAlign.Center
@@ -83,7 +83,7 @@ fun LanguageItem(language: Language, onClickOfLanguage: (languageCode: String) -
 @Preview(name = "Dark Mode", uiMode = UI_MODE_NIGHT_YES)
 @Composable
 fun PreviewCountry() {
-    LanguageItem(Language("English", "English", "in"), {})
+    Country(Country(R.drawable.`in`, "India", "in"), {})
 }
 
 

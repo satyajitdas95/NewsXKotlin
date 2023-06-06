@@ -22,7 +22,7 @@ const val slightlyDeemphasizedAlpha = 0.87f
 
 private val LightColorScheme = lightColorScheme(
     primary = Blue80,
-    onPrimary = Blue80,
+    onPrimary = White,
     primaryContainer = Green20,
     onPrimaryContainer = Blue80,
     secondary=White00,
@@ -33,7 +33,7 @@ private val LightColorScheme = lightColorScheme(
 
 private val DarkColorScheme = darkColorScheme(
     primary = White,
-    onPrimary = White,
+    onPrimary = Blue80,
     primaryContainer = White10,
     onPrimaryContainer = Blue60,
     secondary=White40,

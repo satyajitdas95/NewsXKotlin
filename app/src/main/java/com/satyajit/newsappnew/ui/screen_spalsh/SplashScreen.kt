@@ -1,4 +1,4 @@
-package com.satyajit.newsappnew.ui.spalsh
+package com.satyajit.newsappnew.ui.screen_spalsh
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
