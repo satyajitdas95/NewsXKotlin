@@ -14,6 +14,7 @@ import androidx.compose.ui.unit.dp
 import com.satyajit.newsappnew.R
 import com.satyajit.newsappnew.data.model.Article
 import com.satyajit.newsappnew.ui.base.UiState
+import com.satyajit.newsappnew.ui.generic.showErrorMessageForNoData
 import com.satyajit.newsappnew.ui.generic.showErrorMessageWithRetry
 import com.satyajit.newsappnew.ui.generic.showLoading
 import com.satyajit.newsappnew.ui.screen_top_head_line.NewsArticle
@@ -31,18 +32,29 @@ fun SpecificNewsScreen(
             }
 
             is UiState.Error -> {
-                showErrorMessageWithRetry(stringResource(id = R.string.error_fetch_news),onClickOfRetry)
+                showErrorMessageWithRetry(
+                    stringResource(id = R.string.error_fetch_news),
+                    onClickOfRetry
+                )
             }
 
             is UiState.Success -> {
-                LazyColumn(
-                    modifier = Modifier.padding(vertical = 10.dp, horizontal = 10.dp),
-                    verticalArrangement = Arrangement.spacedBy(14.dp)
-                ) {
-                    items(uiState.data) { article ->
-                        NewsArticle(article = article, onClickOfNewsITem)
+                if (uiState.data.isNotEmpty()) {
+                    LazyColumn(
+                        modifier = Modifier.padding(vertical = 50.dp, horizontal = 10.dp),
+                        verticalArrangement = Arrangement.spacedBy(14.dp)
+                    ) {
+                        items(uiState.data) { article ->
+                            NewsArticle(article = article, onClickOfNewsITem)
+                        }
                     }
+                } else {
+                    showErrorMessageForNoData(
+                        R.raw.jelly_fish,
+                        stringResource(id = R.string.error_no_article_for_this)
+                    )
                 }
+
             }
         }
 

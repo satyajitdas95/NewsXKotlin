@@ -18,9 +18,20 @@ class SpecificNewsViewModel(private val newsRepository: NewsRepository) : ViewMo
     val uiState: StateFlow<UiState<List<Article>>> = _uiState.asStateFlow()
 
 
-    fun fetchNews(countryCode:String) {
+    fun fetchNewsByCountry(countryCode:String) {
         viewModelScope.launch {
             newsRepository.getTopHeadlines(countryCode)
+                .catch { e ->
+                    _uiState.value = UiState.Error(e.toString())
+                }.collect {
+                    _uiState.value = UiState.Success(it)
+                }
+        }
+    }
+
+    fun fetchNewsBySources(sourceName:String) {
+        viewModelScope.launch {
+            newsRepository.getTopHeadlinesBySources(sourceName)
                 .catch { e ->
                     _uiState.value = UiState.Error(e.toString())
                 }.collect {

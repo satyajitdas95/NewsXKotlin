@@ -9,17 +9,23 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.width
 import androidx.compose.material.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.text.TextStyle
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.airbnb.lottie.compose.LottieAnimation
+import com.airbnb.lottie.compose.LottieCompositionSpec
+import com.airbnb.lottie.compose.rememberLottieComposition
+import com.satyajit.newsappnew.R
 
 @Composable
 fun showLoading() {
@@ -46,28 +52,60 @@ fun showErrorMessageWithRetry(message: String, onClickOfRetry: () -> Unit) {
                 text = message,
                 style = MaterialTheme.typography.bodyMedium,
                 modifier = Modifier
-                    .padding(horizontal = 50.dp),
+                    .padding(horizontal = 30.dp),
                 fontSize = 24.sp,
-                color = MaterialTheme.colorScheme.onSurface
+                color = MaterialTheme.colorScheme.onPrimary
             )
 
-            Spacer(modifier = Modifier.height(6.dp))
+            Spacer(modifier = Modifier.height(12.dp))
 
-            Button(onClick = {onClickOfRetry.invoke()}, modifier = Modifier.width(200.dp)) {
-                Text(text = "Retry", color = MaterialTheme.colorScheme.onSurface)
+            Button(onClick = {onClickOfRetry.invoke()}) {
+                Text(text = "Retry", color = MaterialTheme.colorScheme.onPrimary,modifier = Modifier.padding(horizontal = 20.dp))
             }
 
         }
 
+    }
+}
+
+@Composable
+fun showErrorMessageForNoData(resourceID:Int,message: String) {
+    Row(
+        modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center
+    ){
+        Column( modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
+
+            val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(resourceID))
+            LottieAnimation(composition, restartOnPlay = true, iterations = 10, modifier = Modifier.height(200.dp).fillMaxWidth())
+
+            Spacer(modifier = Modifier.height(12.dp))
+
+            Text(
+                text = message,
+                style = MaterialTheme.typography.bodyMedium.copy(textAlign = TextAlign.Center),
+                modifier = Modifier
+                    .padding(horizontal = 30.dp),
+                fontSize = 24.sp,
+                color = MaterialTheme.colorScheme.onPrimary
+            )
+
+
+
+
+
+        }
 
     }
 }
 
-
 @Preview
 @Composable
-fun PreviewLoading() {
-    showLoading()
+fun PreviewErrorForNoData() {
+    showErrorMessageForNoData(R.raw.jelly_fish,"This is an test error message.")
 }
 
 @Preview

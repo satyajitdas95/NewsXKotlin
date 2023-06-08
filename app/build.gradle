@@ -85,6 +85,9 @@ dependencies {
     //broswer
     implementation 'androidx.browser:browser:1.5.0'
 
+    //lottie
+    implementation "com.airbnb.android:lottie-compose:6.0.0"
+
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.5'

@@ -13,6 +13,7 @@ import com.satyajit.newsappnew.ui.screen_country.CountryScreen
 import com.satyajit.newsappnew.ui.screen_language.LanguageScreen
 import com.satyajit.newsappnew.ui.screen_news_details.NewsDetailsScreen
 import com.satyajit.newsappnew.ui.screen_source.SourceScreenRoute
+import com.satyajit.newsappnew.ui.screen_specific_news_list.NewsType
 import com.satyajit.newsappnew.ui.screen_specific_news_list.SpecificNewsRoute
 import com.satyajit.newsappnew.ui.screen_top_head_line.TopHeadLinesRoute
 
@@ -57,22 +58,29 @@ fun HomeScreenNavGraph(
         }
 
         composable(
-            HomeNavGraph.SpecificNewsList.route,
+            HomeNavGraph.NewsListByCountry.route,
             arguments = listOf(navArgument("countryCode") {
-                defaultValue = null
-                nullable = true
-                type = NavType.StringType
-            }, navArgument("sources") {
-                defaultValue = null
-                nullable = true
-                type = NavType.StringType
+                defaultValue = null;nullable = true;type = NavType.StringType
             })
         ) {
             val countryCode = it.arguments?.getString("countryCode") ?: ""
+            SpecificNewsRoute(
+                newsType = NewsType.NewsByCountry,
+                countryCode = countryCode,
+                onClickOfNewsITem = { newsLink -> navController.navigate("newsDetails/?url=$newsLink") },
+                applicationComponent = applicationComponent
+            )
+        }
+
+        composable(
+            HomeNavGraph.NewsListBySource.route,
+            arguments = listOf(navArgument("sources") {
+                defaultValue = null; nullable = true; type = NavType.StringType
+            })
+        ) {
             val sources = it.arguments?.getString("sources") ?: ""
             SpecificNewsRoute(
-                countryCode,
-                sources,
+                newsType = NewsType.NewsBySource, sources = sources,
                 onClickOfNewsITem = { newsLink -> navController.navigate("newsDetails/?url=$newsLink") },
                 applicationComponent = applicationComponent
             )
@@ -89,8 +97,8 @@ sealed class HomeNavGraph(val route: String) {
     object Country : HomeNavGraph("country")
     object Language : HomeNavGraph("language")
     object DetailsOfNews : HomeNavGraph("newsDetails/?url={newsDetailsUrl}")
-    object SpecificNewsList :
-        HomeNavGraph("specificNewsList/?countryCode={countryCode}&sources={sources}")
+    object NewsListByCountry : HomeNavGraph("specificNewsList/?countryCode={countryCode}")
+    object NewsListBySource : HomeNavGraph("specificNewsList/?&sources={sources}")
 }
 
 
