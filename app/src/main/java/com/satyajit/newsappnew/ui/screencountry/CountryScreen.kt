@@ -15,18 +15,24 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.lazy.grid.GridCells
 import androidx.compose.foundation.lazy.grid.LazyVerticalGrid
 import androidx.compose.foundation.lazy.grid.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import coil.compose.AsyncImage
+import coil.request.ImageRequest
 import com.satyajit.newsappnew.R
 import com.satyajit.newsappnew.data.model.Country
 import com.satyajit.newsappnew.ui.base.UiState
@@ -64,7 +70,7 @@ fun CountryScreen(
                 ) {
                     items(
                         items = uiStateCountry.data,
-                        key = { country -> country.iconID }) { country ->
+                        key = { country -> country.countryCode }) { country ->
                         Country(country, onClickOfCountry)
                     }
                 }
@@ -88,9 +94,11 @@ fun Country(country: Country, onClickOfCountry: (countryCode: String) -> Unit) {
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Image(
-            painter = painterResource(id = country.iconID),
+        AsyncImage(
+            model = ImageRequest.Builder(LocalContext.current).data(country.countryFlag)
+                .crossfade(true).build(),
             contentDescription = country.countryName,
+            contentScale = ContentScale.Crop,
             modifier = Modifier
                 .width(80.dp)
                 .height(50.dp)
@@ -113,7 +121,7 @@ fun Country(country: Country, onClickOfCountry: (countryCode: String) -> Unit) {
 @Preview(name = "Dark Mode", uiMode = UI_MODE_NIGHT_YES)
 @Composable
 fun PreviewCountry() {
-    Country(Country(R.drawable.`in`, "India", "in"), {})
+    Country(Country("", "India", "in"), {})
 }
 
 

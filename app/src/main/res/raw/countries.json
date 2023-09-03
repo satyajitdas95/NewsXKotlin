@@ -1,5 +1,4 @@
-{
-  "countries": [
+[
     {
       "countryName": "United Arab Emirates",
       "countryCode": "ae",
@@ -8,257 +7,251 @@
     {
       "countryName": "Argentina",
       "countryCode": "ar",
-      "relationship": "https://flagsapi.com/BE/flat/64.png"
+      "countryFlag": "https://flagsapi.com/BE/flat/64.png"
     },
     {
       "countryName": "Austria",
       "countryCode": "at",
-      "relationship": "https://flagsapi.com/BE/flat/64.png"
+      "countryFlag": "https://flagsapi.com/BE/flat/64.png"
     },
     {
       "countryName": "Australia",
       "countryCode": "au",
-      "relationship": "https://flagsapi.com/BE/flat/64.png"
+      "countryFlag": "https://flagsapi.com/BE/flat/64.png"
     },
     {
       "countryName": "Belgium",
       "countryCode": "bu",
-      "relationship": "https://flagsapi.com/BE/flat/64.png"
+      "countryFlag": "https://flagsapi.com/BE/flat/64.png"
     },
     {
       "countryName": "Bulgaria",
       "countryCode": "bg",
-      "relationship": "https://flagsapi.com/BE/flat/64.png"
+      "countryFlag": "https://flagsapi.com/BE/flat/64.png"
     },
     {
       "countryName": "Brazil",
       "countryCode": "br",
-      "relationship": "https://flagsapi.com/BE/flat/64.png"
+      "countryFlag": "https://flagsapi.com/BE/flat/64.png"
     },
     {
       "countryName": "Canada",
       "countryCode": "ca",
-      "relationship": "https://flagsapi.com/BE/flat/64.png"
+      "countryFlag": "https://flagsapi.com/BE/flat/64.png"
     },
     {
       "countryName": "Switzerland",
       "countryCode": "ch",
-      "relationship": "https://flagsapi.com/BE/flat/64.png"
+      "countryFlag": "https://flagsapi.com/BE/flat/64.png"
     },
     {
       "countryName": "China",
       "countryCode": "cn",
-      "relationship": "https://flagsapi.com/BE/flat/64.png"
+      "countryFlag": "https://flagsapi.com/BE/flat/64.png"
     },
     {
       "countryName": "Colombia",
       "countryCode": "co",
-      "relationship": "https://flagsapi.com/BE/flat/64.png"
+      "countryFlag": "https://flagsapi.com/BE/flat/64.png"
     },
     {
       "countryName": "Cuba",
       "countryCode": "cu",
-      "relationship": "https://flagsapi.com/BE/flat/64.png"
+      "countryFlag": "https://flagsapi.com/BE/flat/64.png"
     },
     {
       "countryName": "Czech Republic",
       "countryCode": "cz",
-      "relationship": "https://flagsapi.com/BE/flat/64.png"
+      "countryFlag": "https://flagsapi.com/BE/flat/64.png"
     },
     {
       "countryName": "Germany",
       "countryCode": "de",
-      "relationship": "https://flagsapi.com/BE/flat/64.png"
+      "countryFlag": "https://flagsapi.com/BE/flat/64.png"
     },
     {
       "countryName": "Egypt",
       "countryCode": "eg",
-      "relationship": "https://flagsapi.com/BE/flat/64.png"
+      "countryFlag": "https://flagsapi.com/BE/flat/64.png"
     },
     {
       "countryName": "France",
       "countryCode": "fr",
-      "relationship": "https://flagsapi.com/BE/flat/64.png"
+      "countryFlag": "https://flagsapi.com/BE/flat/64.png"
     },
     {
       "countryName": "United Kingdom",
       "countryCode": "gb",
-      "relationship": "https://flagsapi.com/BE/flat/64.png"
+      "countryFlag": "https://flagsapi.com/BE/flat/64.png"
     },
     {
       "countryName": "Greece",
       "countryCode": "gr",
-      "relationship": "https://flagsapi.com/BE/flat/64.png"
+      "countryFlag": "https://flagsapi.com/BE/flat/64.png"
     },
     {
       "countryName": "Hong Kong",
       "countryCode": "hk",
-      "relationship": "https://flagsapi.com/BE/flat/64.png"
+      "countryFlag": "https://flagsapi.com/BE/flat/64.png"
     },
     {
       "countryName": "Hungary",
       "countryCode": "hu",
-      "relationship": "https://flagsapi.com/BE/flat/64.png"
+      "countryFlag": "https://flagsapi.com/BE/flat/64.png"
     },
     {
       "countryName": "Indonesia",
       "countryCode": "id",
-      "relationship": "https://flagsapi.com/BE/flat/64.png"
+      "countryFlag": "https://flagsapi.com/BE/flat/64.png"
     },
     {
       "countryName": "Ireland",
       "countryCode": "ie",
-      "relationship": "https://flagsapi.com/BE/flat/64.png"
+      "countryFlag": "https://flagsapi.com/BE/flat/64.png"
     },
     {
       "countryName": "Israel",
       "countryCode": "il",
-      "relationship": "https://flagsapi.com/BE/flat/64.png"
+      "countryFlag": "https://flagsapi.com/BE/flat/64.png"
     },
     {
       "countryName": "India",
       "countryCode": "in",
-      "relationship": "https://flagsapi.com/BE/flat/64.png"
+      "countryFlag": "https://flagsapi.com/BE/flat/64.png"
     },
     {
       "countryName": "Japan",
       "countryCode": "jp",
-      "relationship": "https://flagsapi.com/BE/flat/64.png"
+      "countryFlag": "https://flagsapi.com/BE/flat/64.png"
     },
     {
       "countryName": "South Korea",
       "countryCode": "kr",
-      "relationship": "https://flagsapi.com/BE/flat/64.png"
+      "countryFlag": "https://flagsapi.com/BE/flat/64.png"
     },
     {
       "countryName": "Lithuania",
       "countryCode": "lt",
-      "relationship": "https://flagsapi.com/BE/flat/64.png"
+      "countryFlag": "https://flagsapi.com/BE/flat/64.png"
     },
     {
       "countryName": "Latvia",
       "countryCode": "lv",
-      "relationship": "https://flagsapi.com/BE/flat/64.png"
+      "countryFlag": "https://flagsapi.com/BE/flat/64.png"
     },
     {
       "countryName": "Madagascar",
       "countryCode": "ma",
-      "relationship": "https://flagsapi.com/BE/flat/64.png"
+      "countryFlag": "https://flagsapi.com/BE/flat/64.png"
     },
     {
       "countryName": "Mexico",
       "countryCode": "mx",
-      "relationship": "https://flagsapi.com/BE/flat/64.png"
+      "countryFlag": "https://flagsapi.com/BE/flat/64.png"
     },
     {
       "countryName": "Malaysia",
       "countryCode": "my",
-      "relationship": "https://flagsapi.com/BE/flat/64.png"
+      "countryFlag": "https://flagsapi.com/BE/flat/64.png"
     },
     {
       "countryName": "Nigeria",
       "countryCode": "ng",
-      "relationship": "https://flagsapi.com/BE/flat/64.png"
-    },
-    {
-      "countryName": "Malaysia",
-      "countryCode": "my",
-      "relationship": "https://flagsapi.com/BE/flat/64.png"
+      "countryFlag": "https://flagsapi.com/BE/flat/64.png"
     },
     {
       "countryName": "Netherlands",
       "countryCode": "nl",
-      "relationship": "https://flagsapi.com/BE/flat/64.png"
+      "countryFlag": "https://flagsapi.com/BE/flat/64.png"
     },
     {
       "countryName": "Norway",
       "countryCode": "no",
-      "relationship": "https://flagsapi.com/BE/flat/64.png"
+      "countryFlag": "https://flagsapi.com/BE/flat/64.png"
     },
     {
       "countryName": "New Zealand",
       "countryCode": "nz",
-      "relationship": "https://flagsapi.com/BE/flat/64.png"
+      "countryFlag": "https://flagsapi.com/BE/flat/64.png"
     },
     {
       "countryName": "Philippines",
       "countryCode": "ph",
-      "relationship": "https://flagsapi.com/BE/flat/64.png"
+      "countryFlag": "https://flagsapi.com/BE/flat/64.png"
     },
     {
       "countryName": "Poland",
       "countryCode": "pl",
-      "relationship": "https://flagsapi.com/BE/flat/64.png"
+      "countryFlag": "https://flagsapi.com/BE/flat/64.png"
     },
     {
       "countryName": "South Africa",
       "countryCode": "ro",
-      "relationship": "https://flagsapi.com/BE/flat/64.png"
+      "countryFlag": "https://flagsapi.com/BE/flat/64.png"
     },
     {
       "countryName": "Serbia",
       "countryCode": "rs",
-      "relationship": "https://flagsapi.com/BE/flat/64.png"
+      "countryFlag": "https://flagsapi.com/BE/flat/64.png"
     },
     {
       "countryName": "Russia",
       "countryCode": "ru",
-      "relationship": "https://flagsapi.com/BE/flat/64.png"
+      "countryFlag": "https://flagsapi.com/BE/flat/64.png"
     },
     {
       "countryName": "Saudi Arabia",
       "countryCode": "sa",
-      "relationship": "https://flagsapi.com/BE/flat/64.png"
+      "countryFlag": "https://flagsapi.com/BE/flat/64.png"
     },
     {
       "countryName": "Sweden",
       "countryCode": "se",
-      "relationship": "https://flagsapi.com/BE/flat/64.png"
+      "countryFlag": "https://flagsapi.com/BE/flat/64.png"
     },
     {
       "countryName": "Singapore",
-      "countryCode": "sa",
-      "relationship": "https://flagsapi.com/BE/flat/64.png"
+      "countryCode": "sg",
+      "countryFlag": "https://flagsapi.com/BE/flat/64.png"
     },
     {
       "countryName": "Slovenia",
       "countryCode": "si",
-      "relationship": "https://flagsapi.com/BE/flat/64.png"
+      "countryFlag": "https://flagsapi.com/BE/flat/64.png"
     },
     {
       "countryName": "Slovakia",
       "countryCode": "sk",
-      "relationship": "https://flagsapi.com/BE/flat/64.png"
+      "countryFlag": "https://flagsapi.com/BE/flat/64.png"
     },
     {
       "countryName": "Thailand",
       "countryCode": "th",
-      "relationship": "https://flagsapi.com/BE/flat/64.png"
+      "countryFlag": "https://flagsapi.com/BE/flat/64.png"
     },
     {
       "countryName": "Taiwan",
       "countryCode": "tw",
-      "relationship": "https://flagsapi.com/BE/flat/64.png"
+      "countryFlag": "https://flagsapi.com/BE/flat/64.png"
     },
     {
       "countryName": "Ukraine",
       "countryCode": "ua",
-      "relationship": "https://flagsapi.com/BE/flat/64.png"
+      "countryFlag": "https://flagsapi.com/BE/flat/64.png"
     },
     {
       "countryName": "United States",
       "countryCode": "us",
-      "relationship": "https://flagsapi.com/BE/flat/64.png"
+      "countryFlag": "https://flagsapi.com/BE/flat/64.png"
     },
     {
       "countryName": "Venezuela",
       "countryCode": "ve",
-      "relationship": "https://flagsapi.com/BE/flat/64.png"
+      "countryFlag": "https://flagsapi.com/BE/flat/64.png"
     },
     {
       "countryName": "South Africa",
       "countryCode": "za",
-      "relationship": "https://flagsapi.com/BE/flat/64.png"
+      "countryFlag": "https://flagsapi.com/BE/flat/64.png"
     }
   ]
-}
