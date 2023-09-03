@@ -22,27 +22,57 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.satyajit.newsappnew.R
 import com.satyajit.newsappnew.data.model.Country
+import com.satyajit.newsappnew.ui.base.UiState
+import com.satyajit.newsappnew.ui.generic.ShowErrorMessageWithRetry
+import com.satyajit.newsappnew.ui.generic.ShowLoading
 
 
 @Composable
-fun CountryScreen(countryList: List<Country>, onClickOfCountry: (countryCode: String) -> Unit) {
+fun CountryScreen(
+    uiStateCountry: UiState<List<Country>>,
+    onClickOfCountry: (countryCode: String) -> Unit,
+    onClickOfRetry: () -> Unit
+) {
     Surface(modifier = Modifier.background(MaterialTheme.colorScheme.background)) {
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(2),
-            modifier = Modifier.padding(vertical = 14.dp, horizontal = 14.dp),
-            verticalArrangement = Arrangement.spacedBy(14.dp),
-            horizontalArrangement = Arrangement.spacedBy(14.dp)
-        ) {
-            items(items = countryList, key = { country -> country.iconID }) { country ->
-                Country(country, onClickOfCountry)
+
+        when (uiStateCountry) {
+            is UiState.Loading -> {
+                ShowLoading()
             }
+
+            is UiState.Error -> {
+                ShowErrorMessageWithRetry(
+                    message = stringResource(id = R.string.label_error_retry),
+                    onClickOfRetry = onClickOfRetry
+                )
+            }
+
+
+            is UiState.Success -> {
+                LazyVerticalGrid(
+                    columns = GridCells.Fixed(2),
+                    modifier = Modifier.padding(vertical = 14.dp, horizontal = 14.dp),
+                    verticalArrangement = Arrangement.spacedBy(14.dp),
+                    horizontalArrangement = Arrangement.spacedBy(14.dp)
+                ) {
+                    items(
+                        items = uiStateCountry.data,
+                        key = { country -> country.iconID }) { country ->
+                        Country(country, onClickOfCountry)
+                    }
+                }
+            }
+
         }
+
+
     }
 }
 

@@ -6,6 +6,7 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.satyajit.newsappnew.data.model.Article
+import com.satyajit.newsappnew.data.model.Country
 import com.satyajit.newsappnew.data.repository.CountryRepository
 import com.satyajit.newsappnew.data.repository.LanguageRepository
 import com.satyajit.newsappnew.data.repository.SearchRepository
@@ -19,23 +20,23 @@ import kotlinx.coroutines.flow.catch
 
 class CountryViewModel(private val countryRepository: CountryRepository) : ViewModel() {
 
-    private val _uiState = MutableStateFlow<UiState<List<Article>>>(UiState.Loading)
+    private val _uiState = MutableStateFlow<UiState<List<Country>>>(UiState.Loading)
 
-    val uiState: StateFlow<UiState<List<Article>>> = _uiState.asStateFlow()
+    val uiState: StateFlow<UiState<List<Country>>> = _uiState.asStateFlow()
 
     init {
-       // fetchNews(AppConstant.COUNTRY)
+        fetchAllCountries()
     }
 
-    fun fetchNews(countryCode:String) {
-//        viewModelScope.launch {
-//            searchRepository.getTopHeadlines(countryCode)
-//                .catch { e ->
-//                    _uiState.value = UiState.Error(e.toString())
-//                }.collect {
-//                    _uiState.value = UiState.Success(it)
-//                }
-//        }
+    fun fetchAllCountries() {
+        viewModelScope.launch {
+            countryRepository.getAllSources()
+                .catch { e ->
+                    _uiState.value = UiState.Error(e.toString())
+                }.collect {
+                    _uiState.value = UiState.Success(it)
+                }
+        }
     }
 
     private val _searchTextState: MutableState<String> =

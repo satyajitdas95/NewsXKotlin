@@ -21,10 +21,12 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.satyajit.newsappnew.R
 import com.satyajit.newsappnew.data.model.Sources
 import com.satyajit.newsappnew.ui.base.UiState
 import com.satyajit.newsappnew.ui.generic.ShowErrorMessageWithRetry
@@ -44,7 +46,7 @@ fun SourcesScreen(
             }
 
             is UiState.Error -> {
-                ShowErrorMessageWithRetry("Something went Wrong", onClickOfRetry)
+                ShowErrorMessageWithRetry(stringResource(id = R.string.app_name), onClickOfRetry)
             }
 
             is UiState.Success -> {

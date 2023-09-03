@@ -11,6 +11,7 @@ import androidx.navigation.navArgument
 import com.satyajit.newsappnew.data.local.countryList
 import com.satyajit.newsappnew.data.local.languageList
 import com.satyajit.newsappnew.di.component.ApplicationComponent
+import com.satyajit.newsappnew.ui.screencountry.CountryRoute
 import com.satyajit.newsappnew.ui.screencountry.CountryScreen
 import com.satyajit.newsappnew.ui.screenlanguage.LanguageScreen
 import com.satyajit.newsappnew.ui.screennewsdetails.NavigateToNewsDetails
@@ -56,8 +57,8 @@ fun HomeScreenNavGraph(
         }
 
         composable(HomeNavGraph.Country.route) {
-            CountryScreen(
-                countryList,
+            CountryRoute(
+                applicationComponent = applicationComponent,
                 onClickOfCountry = { countryCode -> navController.navigate("specificNewsList/?countryCode=$countryCode") })
         }
 

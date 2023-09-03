@@ -2,4 +2,10 @@
     <string name="app_name">NewsAppNew</string>
     <string name="error_fetch_news">Error in fetching news.</string>
     <string name="error_no_article_for_this">No News Article found for this News Source </string>
+
+    <!--Country Screen-->
+
+
+    <!--Generic Screen-->
+    <string name="label_error_retry">Something went wrong !!</string>
 </resources>
