@@ -17,7 +17,6 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -28,7 +27,7 @@ import com.airbnb.lottie.compose.rememberLottieComposition
 import com.satyajit.newsappnew.R
 
 @Composable
-fun showLoading() {
+fun ShowLoading() {
     Box(
         modifier = Modifier
             .fillMaxWidth()
@@ -39,7 +38,7 @@ fun showLoading() {
 }
 
 @Composable
-fun showErrorMessageWithRetry(message: String, onClickOfRetry: () -> Unit) {
+fun ShowErrorMessageWithRetry(message: String, onClickOfRetry: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -69,7 +68,7 @@ fun showErrorMessageWithRetry(message: String, onClickOfRetry: () -> Unit) {
 }
 
 @Composable
-fun showErrorMessageForNoData(resourceID:Int,message: String) {
+fun ShowErrorMessageForNoData(resourceID:Int, message: String) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -93,10 +92,6 @@ fun showErrorMessageForNoData(resourceID:Int,message: String) {
                 color = MaterialTheme.colorScheme.onPrimary
             )
 
-
-
-
-
         }
 
     }
@@ -105,11 +100,11 @@ fun showErrorMessageForNoData(resourceID:Int,message: String) {
 @Preview
 @Composable
 fun PreviewErrorForNoData() {
-    showErrorMessageForNoData(R.raw.jelly_fish,"This is an test error message.")
+    ShowErrorMessageForNoData(R.raw.jelly_fish,"This is an test error message.")
 }
 
 @Preview
 @Composable
 fun PreviewErrorWithRetry() {
-    showErrorMessageWithRetry("This is an test error message.") {}
+    ShowErrorMessageWithRetry("This is an test error message.") {}
 }

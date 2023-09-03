@@ -1,23 +1,22 @@
 package com.satyajit.newsappnew.data.local
 
-import com.satyajit.newsappnew.data.model.Language
+import com.satyajit.newsappnew.data.model.LanguageModel
 
-val languageList= listOf<Language>(
-    Language("English","English","en"),
-    Language("العربية","Arabic","ar"),
-    Language("Deutsch","German","de"),
-    Language("Español","Spanish","es"),
-    Language("Français","French","fr"),
-    Language("עברית","Hebrew","he"),
-    Language("Italiano","Italian","it"),
-    Language("Nederlands","Dutch","nl"),
-    Language("Norsk","Norwegian","no"),
-    Language("Português","Portuguese","pt"),
-    Language("Русский","Russian","ru"),
-    Language("Svenska","Swedish","sv"),
-    Language("Українська","Ukrainian","ud"),
-    Language("汉语*/","Chinese","zh")
-
+val languageList= listOf<LanguageModel>(
+    LanguageModel("English","English","en"),
+    LanguageModel("العربية","Arabic","ar"),
+    LanguageModel("Deutsch","German","de"),
+    LanguageModel("Español","Spanish","es"),
+    LanguageModel("Français","French","fr"),
+    LanguageModel("עברית","Hebrew","he"),
+    LanguageModel("Italiano","Italian","it"),
+    LanguageModel("Nederlands","Dutch","nl"),
+    LanguageModel("Norsk","Norwegian","no"),
+    LanguageModel("Português","Portuguese","pt"),
+    LanguageModel("Русский","Russian","ru"),
+    LanguageModel("Svenska","Swedish","sv"),
+    LanguageModel("Українська","Ukrainian","ud"),
+    LanguageModel("汉语*/","Chinese","zh")
 
 /*
     en | English | English

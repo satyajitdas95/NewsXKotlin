@@ -5,7 +5,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.navigation.compose.rememberNavController
 import com.satyajit.newsappnew.NewsApp
-import com.satyajit.newsappnew.navigation_graph.RootNavHost
+import com.satyajit.newsappnew.navigation.RootNavHost
 import com.satyajit.newsappnew.ui.theme.NewsAppNewTheme
 
 class MainActivity : ComponentActivity() {

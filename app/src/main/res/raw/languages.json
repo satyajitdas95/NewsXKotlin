@@ -1,0 +1,74 @@
+{
+  "languages": [
+    {
+      "languageTextOriginal": "English",
+      "languageName": "English",
+      "languageCode": "en"
+    },
+    {
+      "languageTextOriginal": "العربية",
+      "languageName": "Arabic",
+      "languageCode": "ar"
+    },
+    {
+      "languageTextOriginal": "Deutsch",
+      "languageName": "German",
+      "languageCode": "de"
+    },
+    {
+      "languageTextOriginal": "Español",
+      "languageName": "Spanish",
+      "languageCode": "es"
+    },
+    {
+      "languageTextOriginal": "Français",
+      "languageName": "French",
+      "languageCode": "fr"
+    },
+    {
+      "languageTextOriginal": "עברית",
+      "languageName": "Hebrew",
+      "languageCode": "he"
+    },
+    {
+      "languageTextOriginal": "Italiano",
+      "languageName": "Italian",
+      "languageCode": "it"
+    },
+    {
+      "languageTextOriginal": "Nederlands",
+      "languageName": "Dutch",
+      "languageCode": "nl"
+    },
+    {
+      "languageTextOriginal": "Norsk",
+      "languageName": "Norwegian",
+      "languageCode": "no"
+    },
+    {
+      "languageTextOriginal": "Português",
+      "languageName": "Portuguese",
+      "languageCode": "pt"
+    },
+    {
+      "languageTextOriginal": "Русский",
+      "languageName": "Russian",
+      "languageCode": "ru"
+    },
+    {
+      "languageTextOriginal": "Svenska",
+      "languageName": "Swedish",
+      "languageCode": "sv"
+    },
+    {
+      "languageTextOriginal": "Українська",
+      "languageName": "Ukrainian",
+      "languageCode": "ud"
+    },
+    {
+      "languageTextOriginal": "汉语",
+      "languageName": "Chinese",
+      "languageCode": "zh"
+    }
+  ]
+}

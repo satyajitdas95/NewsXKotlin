@@ -6,9 +6,12 @@ import com.satyajit.newsappnew.data.api.NetworkService
 import com.satyajit.newsappnew.di.ApplicationContext
 import com.satyajit.newsappnew.di.module.ApplicationModule
 import com.satyajit.newsappnew.ui.base.ViewModelProviderFactory
-import com.satyajit.newsappnew.ui.screen_source.SourcesViewModel
-import com.satyajit.newsappnew.ui.screen_specific_news_list.SpecificNewsViewModel
-import com.satyajit.newsappnew.ui.screen_top_head_line.TopHeadLineViewModel
+import com.satyajit.newsappnew.ui.screencountry.CountryViewModel
+import com.satyajit.newsappnew.ui.screenlanguage.LanguageViewModel
+import com.satyajit.newsappnew.ui.screensearch.SearchViewModel
+import com.satyajit.newsappnew.ui.screensource.SourcesViewModel
+import com.satyajit.newsappnew.ui.screenspecificnewslist.SpecificNewsViewModel
+import com.satyajit.newsappnew.ui.screentopheadline.TopHeadLineViewModel
 import dagger.Component
 import javax.inject.Singleton
 
@@ -26,6 +29,9 @@ interface ApplicationComponent {
     fun getTopHeadlineViewModelFactory() : ViewModelProviderFactory<TopHeadLineViewModel>
     fun getSpecificNewsViewModelFactory() : ViewModelProviderFactory<SpecificNewsViewModel>
     fun getSourcesViewModelFactory() : ViewModelProviderFactory<SourcesViewModel>
+    fun getSearchViewModelFactory() : ViewModelProviderFactory<SearchViewModel>
+    fun getCountriesViewModelFactory() : ViewModelProviderFactory<CountryViewModel>
+    fun getLanguageViewModelFactory() : ViewModelProviderFactory<LanguageViewModel>
 
 
 }
