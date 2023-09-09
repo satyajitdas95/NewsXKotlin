@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import com.satyajit.newsappnew.ui.base.UiState
 import com.satyajit.newsappnew.utils.AppConstant
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
 
 class TopHeadLineViewModel(private val newsRepository: NewsRepository) : ViewModel() {
@@ -23,7 +24,7 @@ class TopHeadLineViewModel(private val newsRepository: NewsRepository) : ViewMod
     }
 
     fun fetchNews(countryCode:String) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             newsRepository.getTopHeadlines(countryCode)
                 .catch { e ->
                     _uiState.value = UiState.Error(e.toString())

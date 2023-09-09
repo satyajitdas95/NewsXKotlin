@@ -15,24 +15,24 @@ sealed class BottomBarScreen(
     object TopNews : BottomBarScreen(
         route = "topnews",
         title = "Top News",
-        icon = Icons.Default.Home
+        icon = Icons.Filled.Home
     )
 
     object Sources : BottomBarScreen(
         route = "sources",
         title = "Sources",
-        icon = Icons.Default.CheckCircle
+        icon = Icons.Filled.CheckCircle
     )
 
     object Country : BottomBarScreen(
         route = "country",
         title = "Country",
-        icon = Icons.Default.Star
+        icon = Icons.Filled.Star
     )
 
     object Language : BottomBarScreen(
         route = "language",
         title = "Language",
-        icon = Icons.Default.Info
+        icon = Icons.Filled.Info
     )
 }

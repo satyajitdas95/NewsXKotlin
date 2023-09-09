@@ -21,27 +21,24 @@ const val midiumlyDeemphasizedAlpha = 0.5f
 const val slightlyDeemphasizedAlpha = 0.87f
 
 private val LightColorScheme = lightColorScheme(
-    primary = Blue80,
-    onPrimary = White,
-    primaryContainer = Green20,
-    onPrimaryContainer = Blue80,
-    secondary=White00,
-    surface = Green20,
-    onSurface = White00,
-    background = Green20
-    )
+    primary = Blue20,
+    onPrimary = White00,
+    primaryContainer = Blue10,
+    onPrimaryContainer = White20,
+    surface = Black10,
+    onSurface = Green40,
+    onSurfaceVariant = White05
+)
 
 private val DarkColorScheme = darkColorScheme(
-    primary = White,
-    onPrimary = Blue80,
-    primaryContainer = White10,
-    onPrimaryContainer = Blue60,
-    secondary=White40,
-    surface = Black,
-    onSurface = White10,
-    background = Black
-    )
-
+    primary = Blue20,
+    onPrimary = White00,
+    primaryContainer = Blue10,
+    onPrimaryContainer = White20,
+    surface = Black10,
+    onSurface = Green40,
+    onSurfaceVariant = White05
+)
 
 @Composable
 fun NewsAppNewTheme(

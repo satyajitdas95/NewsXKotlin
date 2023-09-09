@@ -31,6 +31,7 @@ import com.satyajit.newsappnew.data.model.Sources
 import com.satyajit.newsappnew.ui.base.UiState
 import com.satyajit.newsappnew.ui.generic.ShowErrorMessageWithRetry
 import com.satyajit.newsappnew.ui.generic.ShowLoading
+import com.satyajit.newsappnew.ui.generic.ShowLoadingGlobe
 
 @Composable
 fun SourcesScreen(
@@ -42,7 +43,7 @@ fun SourcesScreen(
 
         when (uiState) {
             is UiState.Loading -> {
-                ShowLoading()
+                ShowLoadingGlobe()
             }
 
             is UiState.Error -> {

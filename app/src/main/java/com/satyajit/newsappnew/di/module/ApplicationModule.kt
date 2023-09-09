@@ -19,9 +19,12 @@ import com.satyajit.newsappnew.ui.screenspecificnewslist.SpecificNewsViewModel
 import com.satyajit.newsappnew.ui.screentopheadline.TopHeadLineViewModel
 import dagger.Module
 import dagger.Provides
+import okhttp3.OkHttpClient
+import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
+
 
 @Module
 class ApplicationModule(private val application: NewsApp) {
@@ -45,13 +48,23 @@ class ApplicationModule(private val application: NewsApp) {
     @Singleton
     fun provideNetworkService(
         @BaseUrl baseUrl: String,
-        gsonConverterFactory: GsonConverterFactory
+        gsonConverterFactory: GsonConverterFactory,
+        okHttpClient: OkHttpClient
     ): NetworkService {
         return Retrofit.Builder()
             .baseUrl(baseUrl)
             .addConverterFactory(gsonConverterFactory)
+            .client(okHttpClient)
             .build()
             .create(NetworkService::class.java)
+    }
+
+    @Provides
+    @Singleton
+    fun provideOkHttpClient(): OkHttpClient {
+        val interceptor = HttpLoggingInterceptor()
+        interceptor.setLevel(HttpLoggingInterceptor.Level.BODY)
+        return OkHttpClient.Builder().addInterceptor(interceptor).build()
     }
 
     @Provides

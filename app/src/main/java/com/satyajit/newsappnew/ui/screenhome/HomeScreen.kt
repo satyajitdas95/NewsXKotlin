@@ -1,9 +1,17 @@
 package com.satyajit.newsappnew.ui.screenhome
 
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.core.tween
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.Scaffold
 import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.derivedStateOf
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.rememberNavController
@@ -17,17 +25,32 @@ fun HomeScreen(
     navHostController: NavHostController = rememberNavController()
 ) {
 
+    val scrollState = rememberLazyListState()
+
+    val shouldHideBottomBar by remember(scrollState) {
+        derivedStateOf {
+            scrollState.firstVisibleItemScrollOffset == 0
+        }
+    }
+
     Scaffold(
-        topBar = {
-            TopAppBarComponent(navController = navHostController, onNavigateSearch)
-        },
-        bottomBar = { BottomBar(navHostController = navHostController) })
+        bottomBar = {
+            AnimatedVisibility(
+                visible = shouldHideBottomBar,
+                enter = slideInVertically(animationSpec = tween(durationMillis = 200)),
+                exit = slideOutVertically(animationSpec = tween(durationMillis = 200)),
+            ) {
+                BottomBar(navHostController = navHostController)
+            }
+
+        })
     { innerPadding ->
 
         Surface(modifier = Modifier.padding(innerPadding)) {
             HomeScreenNavGraph(
                 navController = navHostController,
-                applicationComponent = applicationComponent, onNavigateSearch
+                applicationComponent = applicationComponent, onNavigateSearch,
+                scrollState = scrollState
             )
         }
 

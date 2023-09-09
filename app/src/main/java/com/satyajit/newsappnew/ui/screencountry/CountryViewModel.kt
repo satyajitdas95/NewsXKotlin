@@ -12,6 +12,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import com.satyajit.newsappnew.ui.base.UiState
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
 
 class CountryViewModel(private val countryRepository: CountryRepository) : ViewModel() {
@@ -21,7 +22,7 @@ class CountryViewModel(private val countryRepository: CountryRepository) : ViewM
     val uiState: StateFlow<UiState<List<Country>>> = _uiState.asStateFlow()
 
     fun fetchAllCountries(countryJson: String) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             countryRepository.getAllCountries(countryJson)
                 .catch { e ->
                     _uiState.value = UiState.Error(e.toString())
@@ -29,15 +30,6 @@ class CountryViewModel(private val countryRepository: CountryRepository) : ViewM
                     _uiState.value = UiState.Success(it)
                 }
         }
-    }
-
-    private val _searchTextState: MutableState<String> =
-        mutableStateOf(value = "")
-
-    val searchTextState: State<String> = _searchTextState
-
-    fun updateSearchTextState(newValue: String) {
-        _searchTextState.value = newValue
     }
 
 }

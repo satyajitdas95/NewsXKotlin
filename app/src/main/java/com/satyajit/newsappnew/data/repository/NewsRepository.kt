@@ -16,7 +16,7 @@ class NewsRepository @Inject constructor(private val networkService: NetworkServ
         return flow {
             emit(networkService.getTopHeadlines(country))
         }.map {
-            it.articles
+            it.articles.filter { article -> article.title != null && article.title != "[Removed]" }
         }
     }
 
@@ -24,7 +24,7 @@ class NewsRepository @Inject constructor(private val networkService: NetworkServ
         return flow {
             emit(networkService.getTopHeadlinesBySources(sources))
         }.map {
-            it.articles
+            it.articles.filter { article -> article.title != null && article.title != "[Removed]" }
         }
     }
 

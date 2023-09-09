@@ -8,7 +8,7 @@ import com.satyajit.newsappnew.R
 import com.satyajit.newsappnew.di.component.ApplicationComponent
 
 @Composable
-fun CountryRoute(
+fun CountryScreenRoute(
     applicationComponent: ApplicationComponent, onClickOfCountry: (countryCode: String) -> Unit
 ) {
 

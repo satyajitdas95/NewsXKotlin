@@ -2,6 +2,10 @@ package com.satyajit.newsappnew.ui.screenspecificnewslist
 
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.lifecycle.viewmodel.compose.viewModel
 import com.satyajit.newsappnew.di.component.ApplicationComponent
 
@@ -12,18 +16,40 @@ fun SpecificNewsRoute(
     sources: String = "",
     languageCode: String = "",
     onClickOfNewsITem: (newsUrl: String) -> Unit,
+    onClickOfBack: () -> Unit,
     applicationComponent: ApplicationComponent,
 ) {
     val viewModel: SpecificNewsViewModel =
         viewModel(factory = applicationComponent.getSpecificNewsViewModelFactory())
 
-    fetchNewsByType(viewModel = viewModel, newsType = newsType, countryCode =  countryCode, languageCode = languageCode, sources = sources)
 
-    val onClickOfRetry = { fetchNewsByType(viewModel = viewModel, newsType = newsType, countryCode = countryCode, languageCode = languageCode, sources = sources) }
+    fetchNewsByType(
+        viewModel = viewModel,
+        newsType = newsType,
+        countryCode = countryCode,
+        languageCode = languageCode,
+        sources = sources
+    )
+
+    val onClickOfRetry = {
+        fetchNewsByType(
+            viewModel = viewModel,
+            newsType = newsType,
+            countryCode = countryCode,
+            languageCode = languageCode,
+            sources = sources
+        )
+    }
 
     val uiState = viewModel.uiState.collectAsState().value
 
-    SpecificNewsScreen(uiState, onClickOfNewsITem, onClickOfRetry)
+    SpecificNewsScreen(
+        "",
+        uiState,
+        onClickOfNewsITem,
+        onClickOfRetry,
+        onBackPressed = onClickOfBack
+    )
 
 }
 

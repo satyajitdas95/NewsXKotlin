@@ -1,5 +1,6 @@
 package com.satyajit.newsappnew.navigation
 
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.platform.LocalContext
@@ -8,10 +9,9 @@ import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
-import com.satyajit.newsappnew.data.local.languageList
 import com.satyajit.newsappnew.di.component.ApplicationComponent
-import com.satyajit.newsappnew.ui.screencountry.CountryRoute
-import com.satyajit.newsappnew.ui.screenlanguage.LanguageScreen
+import com.satyajit.newsappnew.ui.screencountry.CountryScreenRoute
+import com.satyajit.newsappnew.ui.screenlanguage.LanguageScreenRoute
 import com.satyajit.newsappnew.ui.screennewsdetails.NavigateToNewsDetails
 import com.satyajit.newsappnew.ui.screensearch.SearchRoot
 import com.satyajit.newsappnew.ui.screensource.SourceScreenRoute
@@ -24,22 +24,25 @@ import com.satyajit.newsappnew.ui.screentopheadline.TopHeadLinesRoute
 fun HomeScreenNavGraph(
     navController: NavHostController,
     applicationComponent: ApplicationComponent,
-    onNavigateSearch: () -> Unit
+    onNavigateSearch: () -> Unit,
+    scrollState: LazyListState
 ) {
     NavHost(navController = navController, startDestination = HomeNavGraph.TopNews.route) {
 
         composable(HomeNavGraph.TopNews.route) {
             TopHeadLinesRoute(
                 onClickOfNewsITem = { newslink -> navController.navigate("newsDetails/?url=$newslink") },
-                applicationComponent,
+                onClickOfSearch = onNavigateSearch,
+                applicationComponent,scrollState
             )
         }
 
-        composable(HomeNavGraph.DetailsOfNews.route, arguments = listOf(
-            navArgument("newsDetailsUrl") {
+        composable(
+            HomeNavGraph.DetailsOfNews.route,
+            arguments = listOf(navArgument("newsDetailsUrl") {
                 type = NavType.StringType
-            }
-        )) {
+            })
+        ) {
             val newsUrl = it.arguments?.getString("newsDetailsUrl") ?: ""
             val context = LocalContext.current
             LaunchedEffect(key1 = newsUrl, block = {
@@ -49,33 +52,28 @@ fun HomeScreenNavGraph(
         }
 
         composable(HomeNavGraph.Sources.route) {
-            SourceScreenRoute(
-                applicationComponent = applicationComponent,
+            SourceScreenRoute(applicationComponent = applicationComponent,
                 onClickOfSource = { sourceName -> navController.navigate("specificNewsList/?sources=$sourceName") })
         }
 
         composable(HomeNavGraph.Country.route) {
-            CountryRoute(
-                applicationComponent = applicationComponent,
+            CountryScreenRoute(applicationComponent = applicationComponent,
                 onClickOfCountry = { countryCode -> navController.navigate("specificNewsList/?countryCode=$countryCode") })
         }
 
         composable(HomeNavGraph.Language.route) {
-            LanguageScreen(
-                languageList,
+            LanguageScreenRoute(applicationComponent = applicationComponent,
                 onClickOfLanguage = { languageCode -> navController.navigate("specificNewsList/?language=$languageCode") })
         }
 
         composable(HomeNavGraph.SearchScreen.route) {
-            SearchRoot(
-                applicationComponent = applicationComponent,
+            SearchRoot(applicationComponent = applicationComponent,
                 onClickOfNewsITem = { newslink -> navController.navigate("newsDetails/?url=$newslink") },
                 onNavigateBack = { navController.popBackStack() })
         }
 
         composable(
-            HomeNavGraph.NewsListByCountry.route,
-            arguments = listOf(navArgument("countryCode") {
+            HomeNavGraph.NewsListByCountry.route, arguments = listOf(navArgument("countryCode") {
                 defaultValue = null;nullable = true;type = NavType.StringType
             })
         ) {
@@ -84,34 +82,37 @@ fun HomeScreenNavGraph(
                 newsType = NewsType.NewsByCountry,
                 countryCode = countryCode,
                 onClickOfNewsITem = { newsLink -> navController.navigate("newsDetails/?url=$newsLink") },
+                onClickOfBack = { navController.popBackStack() },
                 applicationComponent = applicationComponent
             )
         }
 
         composable(
-            HomeNavGraph.NewsListBySource.route,
-            arguments = listOf(navArgument("sources") {
+            HomeNavGraph.NewsListBySource.route, arguments = listOf(navArgument("sources") {
                 defaultValue = null; nullable = true; type = NavType.StringType
             })
         ) {
             val sources = it.arguments?.getString("sources") ?: ""
             SpecificNewsRoute(
-                newsType = NewsType.NewsBySource, sources = sources,
+                newsType = NewsType.NewsBySource,
+                sources = sources,
                 onClickOfNewsITem = { newsLink -> navController.navigate("newsDetails/?url=$newsLink") },
+                onClickOfBack = { navController.popBackStack() },
                 applicationComponent = applicationComponent
             )
         }
 
         composable(
-            HomeNavGraph.NewsListByLanguage.route,
-            arguments = listOf(navArgument("language") {
+            HomeNavGraph.NewsListByLanguage.route, arguments = listOf(navArgument("language") {
                 defaultValue = null; nullable = true; type = NavType.StringType
             })
         ) {
             val sources = it.arguments?.getString("language") ?: ""
             SpecificNewsRoute(
-                newsType = NewsType.NewsBySource, sources = sources,
+                newsType = NewsType.NewsBySource,
+                sources = sources,
                 onClickOfNewsITem = { newsLink -> navController.navigate("newsDetails/?url=$newsLink") },
+                onClickOfBack = { navController.popBackStack() },
                 applicationComponent = applicationComponent
             )
         }

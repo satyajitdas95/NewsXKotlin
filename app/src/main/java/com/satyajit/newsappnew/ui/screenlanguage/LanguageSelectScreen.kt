@@ -24,21 +24,44 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.satyajit.newsappnew.data.model.LanguageModel
+import com.satyajit.newsappnew.ui.base.UiState
+import com.satyajit.newsappnew.ui.generic.ShowLoading
 
 
 @Composable
-fun LanguageScreen(languageList: List<LanguageModel>, onClickOfLanguage: (languageCode: String) -> Unit) {
+fun LanguageScreen(
+    uiStateLanguage: UiState<List<LanguageModel>>,
+    onClickOfLanguage: (languageCode: String) -> Unit
+) {
     Surface(modifier = Modifier.background(MaterialTheme.colorScheme.background)) {
-        LazyVerticalGrid(
-            columns = GridCells.Fixed(2),
-            modifier = Modifier.padding(vertical = 14.dp, horizontal = 14.dp),
-            verticalArrangement = Arrangement.spacedBy(14.dp),
-            horizontalArrangement = Arrangement.spacedBy(14.dp)
-        ) {
-            items(items = languageList, key = { language -> language.languageCode}) { language ->
-                LanguageItem(language, onClickOfLanguage)
+
+        when (uiStateLanguage) {
+
+            is UiState.Loading -> {
+                ShowLoading()
             }
+
+            is UiState.Error -> {
+
+            }
+
+            is UiState.Success -> {
+                LazyVerticalGrid(
+                    columns = GridCells.Fixed(2),
+                    modifier = Modifier.padding(vertical = 14.dp, horizontal = 14.dp),
+                    verticalArrangement = Arrangement.spacedBy(14.dp),
+                    horizontalArrangement = Arrangement.spacedBy(14.dp)
+                ) {
+                    items(
+                        items = uiStateLanguage.data,
+                        key = { language -> language.languageCode }) { language ->
+                        LanguageItem(language, onClickOfLanguage)
+                    }
+                }
+            }
+
         }
+
     }
 }
 

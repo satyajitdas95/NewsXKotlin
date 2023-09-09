@@ -60,7 +60,6 @@ fun CountryScreen(
                 )
             }
 
-
             is UiState.Success -> {
                 LazyVerticalGrid(
                     columns = GridCells.Fixed(2),
@@ -75,10 +74,7 @@ fun CountryScreen(
                     }
                 }
             }
-
         }
-
-
     }
 }
 

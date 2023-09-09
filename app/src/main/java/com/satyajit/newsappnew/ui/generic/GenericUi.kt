@@ -9,6 +9,7 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.MaterialTheme
@@ -36,6 +37,19 @@ fun ShowLoading() {
         CircularProgressIndicator(modifier = Modifier.align(Alignment.Center))
     }
 }
+
+@Composable
+fun ShowLoadingGlobe() {
+    Box(
+        modifier = Modifier
+            .fillMaxWidth()
+            .fillMaxHeight()
+    ) {
+        val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.jelly_fish))
+        LottieAnimation(composition, restartOnPlay = true, iterations = 10, modifier = Modifier.height(150.dp).width(150.dp).align(Alignment.Center))
+    }
+}
+
 
 @Composable
 fun ShowErrorMessageWithRetry(message: String, onClickOfRetry: () -> Unit) {

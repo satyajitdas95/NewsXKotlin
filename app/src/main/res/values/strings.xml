@@ -8,4 +8,7 @@
 
     <!--Generic Screen-->
     <string name="label_error_retry">Something went wrong !!</string>
+
+    <!--Home Screen-->
+    <string name="label_search">Search..</string>
 </resources>

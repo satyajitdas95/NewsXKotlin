@@ -11,6 +11,7 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.MaterialTheme
@@ -31,37 +32,47 @@ import com.satyajit.newsappnew.data.model.Article
 import com.satyajit.newsappnew.data.model.Sources
 import com.satyajit.newsappnew.ui.base.UiState
 import com.satyajit.newsappnew.ui.generic.ShowErrorMessageWithRetry
-import com.satyajit.newsappnew.ui.generic.ShowLoading
+import com.satyajit.newsappnew.ui.generic.ShowLoadingGlobe
+import com.satyajit.newsappnew.ui.screensearch.SearchViewOnly
 import com.satyajit.newsappnew.ui.theme.NewsAppNewTheme
 import com.satyajit.newsappnew.ui.theme.slightlyDeemphasizedAlpha
-import com.satyajit.newsappnew.ui.theme.stronglyDeemphasizedAlpha
 
 @Composable
 fun TopHeadlineScreen(
     uiState: UiState<List<Article>>,
     onClickOfNewsITem: (newsUrl: String) -> Unit,
-    onClickOfRetry: () -> Unit
+    onClickOfRetry: () -> Unit,
+    onClickOfSearch: () -> Unit,
+    scrollState: LazyListState
 ) {
-    Surface(modifier = Modifier.background(MaterialTheme.colorScheme.background)) {
-        when (uiState) {
-            is UiState.Loading -> {
-                ShowLoading()
-            }
+    Surface(modifier = Modifier.background(MaterialTheme.colorScheme.primary)) {
 
-            is UiState.Error -> {
-                ShowErrorMessageWithRetry(
-                    stringResource(id = R.string.error_fetch_news),
-                    onClickOfRetry
-                )
-            }
+        Column {
+            SearchViewOnly(
+                text = stringResource(id = R.string.label_search),
+                onSearchClicked = onClickOfSearch,
+            )
 
-            is UiState.Success -> {
-                LazyColumn(
-                    modifier = Modifier.padding(vertical = 10.dp, horizontal = 10.dp),
-                    verticalArrangement = Arrangement.spacedBy(14.dp)
-                ) {
-                    items(uiState.data) { article ->
-                        NewsArticle(article = article, onClickOfNewsITem)
+            when (uiState) {
+                is UiState.Loading -> {
+                    ShowLoadingGlobe()
+                }
+
+                is UiState.Error -> {
+                    ShowErrorMessageWithRetry(
+                        stringResource(id = R.string.error_fetch_news),
+                        onClickOfRetry
+                    )
+                }
+
+                is UiState.Success -> {
+                    LazyColumn(
+                        modifier = Modifier.padding(vertical = 10.dp, horizontal = 10.dp),
+                        verticalArrangement = Arrangement.spacedBy(14.dp), state = scrollState
+                    ) {
+                        items(uiState.data) { article ->
+                            NewsArticle(article = article, onClickOfNewsITem)
+                        }
                     }
                 }
             }
@@ -97,7 +108,9 @@ fun NewsArticle(article: Article, onClickOfNewsITem: (newsUrl: String) -> Unit) 
         modifier = Modifier
             .fillMaxWidth()
             .background(MaterialTheme.colorScheme.primaryContainer, MaterialTheme.shapes.medium)
+            .clip(MaterialTheme.shapes.medium)
             .clickable { onClickOfNewsITem(article.url ?: "") }
+
     ) {
         AsyncImage(
             model = ImageRequest.Builder(LocalContext.current).data(article.imageUrl)
@@ -107,31 +120,30 @@ fun NewsArticle(article: Article, onClickOfNewsITem: (newsUrl: String) -> Unit) 
             modifier = Modifier
                 .height(200.dp)
                 .fillMaxWidth()
-                .clip(RoundedCornerShape(topStart = 8.dp, topEnd = 8.dp))
                 .background(
-                    color = MaterialTheme.colorScheme.onSurface,
-                    MaterialTheme.shapes.medium
+                    color = MaterialTheme.colorScheme.primaryContainer,
+                    RoundedCornerShape(topStart = 16.dp, topEnd = 16.dp)
                 )
         )
         Column(modifier = Modifier.padding(horizontal = 14.dp, vertical = 14.dp)) {
             Text(
                 text = article.title ?: "",
-                style = MaterialTheme.typography.titleLarge,
-                color = MaterialTheme.colorScheme.primary.copy(slightlyDeemphasizedAlpha),
+                style = MaterialTheme.typography.titleMedium,
+                color = MaterialTheme.colorScheme.onPrimaryContainer,
                 maxLines = 2
             )
             Spacer(modifier = Modifier.height(10.dp))
             Text(
                 text = article.description ?: "",
-                style = MaterialTheme.typography.bodyLarge,
-                color = MaterialTheme.colorScheme.onPrimary.copy(stronglyDeemphasizedAlpha),
+                style = MaterialTheme.typography.bodyMedium,
+                color = MaterialTheme.colorScheme.onPrimaryContainer.copy(slightlyDeemphasizedAlpha),
                 maxLines = 2,
             )
             Spacer(modifier = Modifier.height(10.dp))
             Text(
                 text = article.source?.name ?: "",
-                style = MaterialTheme.typography.labelSmall,
-                color = MaterialTheme.colorScheme.primary.copy(slightlyDeemphasizedAlpha),
+                style = MaterialTheme.typography.bodySmall,
+                color = MaterialTheme.colorScheme.onPrimaryContainer.copy(slightlyDeemphasizedAlpha),
                 maxLines = 1
             )
         }

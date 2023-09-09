@@ -20,13 +20,10 @@ class LanguageViewModel @Inject constructor(private val languageRepository: Lang
 
     val uiStateFlow: StateFlow<UiState<List<LanguageModel>>> = _uiStateFlow.asStateFlow()
 
-    init {
-        fetchLanguage()
-    }
 
-    private fun fetchLanguage() {
+    fun fetchAllLanguage(allLanguageJSon:String) {
         viewModelScope.launch(Dispatchers.IO) {
-            languageRepository.getAllLanguages().catch {
+            languageRepository.getAllLanguages(allLanguageJSon).catch {
                 _uiStateFlow.value = UiState.Error(it.toString())
             }.collect {
                 _uiStateFlow.value = UiState.Success(it)
