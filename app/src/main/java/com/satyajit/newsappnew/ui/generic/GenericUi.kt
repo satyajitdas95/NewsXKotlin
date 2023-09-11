@@ -1,5 +1,6 @@
 package com.satyajit.newsappnew.ui.generic
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -18,6 +19,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -46,7 +48,15 @@ fun ShowLoadingGlobe() {
             .fillMaxHeight()
     ) {
         val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(R.raw.jelly_fish))
-        LottieAnimation(composition, restartOnPlay = true, iterations = 10, modifier = Modifier.height(150.dp).width(150.dp).align(Alignment.Center))
+        LottieAnimation(
+            composition,
+            restartOnPlay = true,
+            iterations = 10,
+            modifier = Modifier
+                .height(150.dp)
+                .width(150.dp)
+                .align(Alignment.Center)
+        )
     }
 }
 
@@ -56,11 +66,17 @@ fun ShowErrorMessageWithRetry(message: String, onClickOfRetry: () -> Unit) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .fillMaxHeight(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center
-    ){
-        Column( modifier = Modifier
-            .fillMaxWidth()
-            .fillMaxHeight(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
+            .fillMaxHeight().background(color = Color.Transparent),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
             Text(
                 text = message,
                 style = MaterialTheme.typography.bodyMedium,
@@ -72,8 +88,12 @@ fun ShowErrorMessageWithRetry(message: String, onClickOfRetry: () -> Unit) {
 
             Spacer(modifier = Modifier.height(12.dp))
 
-            Button(onClick = {onClickOfRetry.invoke()}) {
-                Text(text = "Retry", color = MaterialTheme.colorScheme.onPrimary,modifier = Modifier.padding(horizontal = 20.dp))
+            Button(onClick = { onClickOfRetry.invoke() }) {
+                Text(
+                    text = "Retry",
+                    color = MaterialTheme.colorScheme.onPrimary,
+                    modifier = Modifier.padding(horizontal = 20.dp)
+                )
             }
 
         }
@@ -82,18 +102,31 @@ fun ShowErrorMessageWithRetry(message: String, onClickOfRetry: () -> Unit) {
 }
 
 @Composable
-fun ShowErrorMessageForNoData(resourceID:Int, message: String) {
+fun ShowErrorMessageForNoData(resourceID: Int, message: String) {
     Row(
         modifier = Modifier
             .fillMaxWidth()
-            .fillMaxHeight(), verticalAlignment = Alignment.CenterVertically, horizontalArrangement = Arrangement.Center
-    ){
-        Column( modifier = Modifier
-            .fillMaxWidth()
-            .fillMaxHeight(), horizontalAlignment = Alignment.CenterHorizontally, verticalArrangement = Arrangement.Center) {
+            .fillMaxHeight(),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.Center
+    ) {
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .fillMaxHeight(),
+            horizontalAlignment = Alignment.CenterHorizontally,
+            verticalArrangement = Arrangement.Center
+        ) {
 
             val composition by rememberLottieComposition(LottieCompositionSpec.RawRes(resourceID))
-            LottieAnimation(composition, restartOnPlay = true, iterations = 10, modifier = Modifier.height(200.dp).fillMaxWidth())
+            LottieAnimation(
+                composition,
+                restartOnPlay = true,
+                iterations = 10,
+                modifier = Modifier
+                    .height(200.dp)
+                    .fillMaxWidth()
+            )
 
             Spacer(modifier = Modifier.height(12.dp))
 
@@ -114,7 +147,7 @@ fun ShowErrorMessageForNoData(resourceID:Int, message: String) {
 @Preview
 @Composable
 fun PreviewErrorForNoData() {
-    ShowErrorMessageForNoData(R.raw.jelly_fish,"This is an test error message.")
+    ShowErrorMessageForNoData(R.raw.jelly_fish, "This is an test error message.")
 }
 
 @Preview

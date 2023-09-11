@@ -21,6 +21,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -32,6 +34,7 @@ import com.satyajit.newsappnew.ui.base.UiState
 import com.satyajit.newsappnew.ui.generic.ShowErrorMessageWithRetry
 import com.satyajit.newsappnew.ui.generic.ShowLoading
 import com.satyajit.newsappnew.ui.generic.ShowLoadingGlobe
+import kotlin.random.Random
 
 @Composable
 fun SourcesScreen(
@@ -63,9 +66,7 @@ fun SourcesScreen(
             }
         }
 
-
     }
-
 
 }
 
@@ -76,8 +77,9 @@ fun SourceItem(sourcesItem: Sources, onClickOfSources: (sourceName: String) -> U
             .fillMaxWidth()
             .wrapContentHeight()
             .background(MaterialTheme.colorScheme.primaryContainer, MaterialTheme.shapes.medium)
-            .padding(12.dp)
-            .clickable { onClickOfSources(sourcesItem.name) },
+            .clip(MaterialTheme.shapes.medium)
+            .clickable { onClickOfSources(sourcesItem.name) }
+            .padding(12.dp),
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.Start
     ) {
@@ -85,7 +87,7 @@ fun SourceItem(sourcesItem: Sources, onClickOfSources: (sourceName: String) -> U
         Text(
             text = sourcesItem.name,
             fontSize = 24.sp,
-            color = MaterialTheme.colorScheme.primary,
+            color = MaterialTheme.colorScheme.onPrimaryContainer,
             textAlign = TextAlign.Center
         )
 
@@ -95,7 +97,7 @@ fun SourceItem(sourcesItem: Sources, onClickOfSources: (sourceName: String) -> U
             Text(
                 text = description.trim(),
                 fontSize = 14.sp,
-                color = MaterialTheme.colorScheme.primary,
+                color = MaterialTheme.colorScheme.onPrimaryContainer,
                 textAlign = TextAlign.Start, maxLines = 2
             )
         }
@@ -108,7 +110,11 @@ fun SourceItem(sourcesItem: Sources, onClickOfSources: (sourceName: String) -> U
                     text = category,
                     modifier = Modifier
                         .background(
-                            color = MaterialTheme.colorScheme.primary,
+                            color = Color(
+                                red = Random.nextInt(40, 256),
+                                green=Random.nextInt(40, 256),
+                                blue = Random.nextInt(40, 256)
+                            ),
                             shape = MaterialTheme.shapes.medium
                         )
                         .padding(horizontal = 12.dp, vertical = 6.dp),
@@ -126,7 +132,11 @@ fun SourceItem(sourcesItem: Sources, onClickOfSources: (sourceName: String) -> U
                     text = language,
                     modifier = Modifier
                         .background(
-                            color = MaterialTheme.colorScheme.primary,
+                            color = Color(
+                                red = Random.nextInt(40, 256),
+                                green=Random.nextInt(40, 256),
+                                blue = Random.nextInt(40, 256)
+                            ),
                             shape = MaterialTheme.shapes.medium
                         )
                         .padding(horizontal = 12.dp, vertical = 6.dp),
@@ -144,7 +154,11 @@ fun SourceItem(sourcesItem: Sources, onClickOfSources: (sourceName: String) -> U
                     text = country,
                     modifier = Modifier
                         .background(
-                            color = MaterialTheme.colorScheme.primary,
+                            color = Color(
+                                red = Random.nextInt(40, 256),
+                                green=Random.nextInt(40, 256),
+                                blue = Random.nextInt(40, 256)
+                            ),
                             shape = MaterialTheme.shapes.medium
                         )
                         .padding(horizontal = 12.dp, vertical = 6.dp),

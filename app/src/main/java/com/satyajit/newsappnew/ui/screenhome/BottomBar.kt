@@ -33,6 +33,7 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavDestination
@@ -70,8 +71,14 @@ fun BottomNavigationBar(screens: List<BottomBarScreen>, navHostController: NavHo
 
     BottomAppBar(
         modifier = Modifier
-            .coloredShadow(Color.White, shadowRadius = 16.dp, borderRadius = 6.dp),
-        tonalElevation = 40.dp,
+            .fillMaxWidth()
+            .background(color= MaterialTheme.colorScheme.surface)
+            .graphicsLayer {
+                clip = true
+                shape = RoundedCornerShape(topStart = 20.dp, topEnd = 20.dp)
+                shadowElevation = 8f
+            },
+        tonalElevation = 0.dp,
         actions = {
             screens.forEachIndexed { index, item ->
                 AddItem(
@@ -100,8 +107,8 @@ fun RowScope.AddItem(
         selected = currentDestination?.hierarchy?.any {
             it.route == screen.route
         } == true,
-        unselectedContentColor = MaterialTheme.colorScheme.onPrimary.copy(alpha = 0.4f),
-        selectedContentColor =MaterialTheme.colorScheme.onPrimary,
+        unselectedContentColor = MaterialTheme.colorScheme.inversePrimary.copy(alpha = 0.3f),
+        selectedContentColor = MaterialTheme.colorScheme.inversePrimary,
         onClick = {
             navController.navigate(screen.route) {
                 popUpTo(navController.graph.findStartDestination().id)

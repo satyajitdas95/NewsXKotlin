@@ -19,6 +19,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -26,6 +28,7 @@ import androidx.compose.ui.unit.sp
 import com.satyajit.newsappnew.data.model.LanguageModel
 import com.satyajit.newsappnew.ui.base.UiState
 import com.satyajit.newsappnew.ui.generic.ShowLoading
+import kotlin.random.Random
 
 
 @Composable
@@ -73,6 +76,7 @@ fun LanguageItem(language: LanguageModel, onClickOfLanguage: (languageCode: Stri
             .fillMaxWidth()
             .height(120.dp)
             .background(MaterialTheme.colorScheme.primaryContainer, MaterialTheme.shapes.medium)
+            .clip(MaterialTheme.shapes.medium)
             .clickable { onClickOfLanguage(language.languageCode) },
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
@@ -80,17 +84,21 @@ fun LanguageItem(language: LanguageModel, onClickOfLanguage: (languageCode: Stri
 
         Text(
             text = language.languageTextOriginal,
-            fontSize = 28.sp,
-            color = MaterialTheme.colorScheme.primary,
+            style = MaterialTheme.typography.titleLarge,
+            color = Color(
+                red = Random.nextInt(40, 256),
+                green = Random.nextInt(40, 256),
+                blue = Random.nextInt(40, 256)
+            ),
             textAlign = TextAlign.Center
         )
 
-        Spacer(modifier = Modifier.height(4.dp))
+        Spacer(modifier = Modifier.height(8.dp))
 
         Text(
             text = language.languageName,
-            fontSize = 14.sp,
-            color = MaterialTheme.colorScheme.primary,
+            style = MaterialTheme.typography.bodyMedium,
+            color = MaterialTheme.colorScheme.onPrimaryContainer,
             textAlign = TextAlign.Center
         )
 

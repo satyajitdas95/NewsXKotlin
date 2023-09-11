@@ -23,20 +23,22 @@ const val slightlyDeemphasizedAlpha = 0.87f
 private val LightColorScheme = lightColorScheme(
     primary = Blue20,
     onPrimary = White00,
+    inversePrimary = Orange20,
     primaryContainer = Blue10,
     onPrimaryContainer = White20,
-    surface = Black10,
-    onSurface = Green40,
+    surface = Black40,
+    onSurface = White05,
     onSurfaceVariant = White05
 )
 
 private val DarkColorScheme = darkColorScheme(
     primary = Blue20,
     onPrimary = White00,
+    inversePrimary = Orange20,
     primaryContainer = Blue10,
     onPrimaryContainer = White20,
-    surface = Black10,
-    onSurface = Green40,
+    surface = Black40,
+    onSurface = White05,
     onSurfaceVariant = White05
 )
 
@@ -59,8 +61,9 @@ fun NewsAppNewTheme(
     if (!view.isInEditMode) {
         SideEffect {
             val window = (view.context as Activity).window
-            window.statusBarColor = colorScheme.primary.toArgb()
-            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = darkTheme
+            window.statusBarColor = colorScheme.surface.toArgb()
+            window.navigationBarColor = colorScheme.primary.toArgb()
+            WindowCompat.getInsetsController(window, view).isAppearanceLightStatusBars = !darkTheme
         }
     }
 

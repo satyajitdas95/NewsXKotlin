@@ -37,8 +37,8 @@ fun HomeScreen(
         bottomBar = {
             AnimatedVisibility(
                 visible = shouldHideBottomBar,
-                enter = slideInVertically(animationSpec = tween(durationMillis = 200)),
-                exit = slideOutVertically(animationSpec = tween(durationMillis = 200)),
+                enter = slideInVertically(animationSpec = tween(durationMillis = 800)),
+                exit = slideOutVertically(animationSpec = tween(durationMillis = 800)),
             ) {
                 BottomBar(navHostController = navHostController)
             }

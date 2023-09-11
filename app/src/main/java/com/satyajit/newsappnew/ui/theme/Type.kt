@@ -10,17 +10,24 @@ import androidx.compose.ui.unit.sp
 
 // Set of Material typography styles to start with
 val Typography = Typography(
+    titleLarge = TextStyle(
+        fontFamily = FontFamily.Serif,
+        fontWeight = FontWeight.ExtraBold,
+        fontSize = 22.sp,
+        lineHeight = 20.sp,
+        letterSpacing = 0.02.sp,
+    ),
     titleMedium = TextStyle(
         fontFamily = FontFamily.Serif,
         fontWeight = FontWeight.Bold,
-        fontSize = 20.sp,
-        lineHeight = 24.sp,
+        fontSize = 18.sp,
+        lineHeight = 20.sp,
         letterSpacing = 0.02.sp,
     ),
     bodyMedium = TextStyle(
         fontFamily = FontFamily.Serif,
         fontWeight = FontWeight.Medium,
-        fontSize = 14.sp,
+        fontSize = 12.sp,
         lineHeight = 16.sp,
         letterSpacing = 0.03.sp,
     ),

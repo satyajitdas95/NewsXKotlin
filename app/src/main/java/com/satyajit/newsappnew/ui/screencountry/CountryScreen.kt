@@ -86,6 +86,7 @@ fun Country(country: Country, onClickOfCountry: (countryCode: String) -> Unit) {
             .fillMaxWidth()
             .height(120.dp)
             .background(MaterialTheme.colorScheme.primaryContainer, MaterialTheme.shapes.medium)
+            .clip(MaterialTheme.shapes.medium)
             .clickable { onClickOfCountry(country.countryCode) },
         verticalArrangement = Arrangement.Center,
         horizontalAlignment = Alignment.CenterHorizontally
@@ -96,17 +97,17 @@ fun Country(country: Country, onClickOfCountry: (countryCode: String) -> Unit) {
             contentDescription = country.countryName,
             contentScale = ContentScale.Crop,
             modifier = Modifier
-                .width(80.dp)
-                .height(50.dp)
-                .padding(vertical = 6.dp)
+                .width(75.dp)
+                .height(45.dp)
+                .padding(vertical = 6.dp).clip(MaterialTheme.shapes.extraSmall)
         )
 
-        Spacer(modifier = Modifier.height(4.dp))
+        Spacer(modifier = Modifier.height(8.dp))
 
         Text(
             text = country.countryName,
-            fontSize = 18.sp,
-            color = MaterialTheme.colorScheme.primary,
+            style = MaterialTheme.typography.bodyLarge,
+            color= MaterialTheme.colorScheme.onPrimaryContainer,
             textAlign = TextAlign.Center
         )
 
@@ -117,7 +118,7 @@ fun Country(country: Country, onClickOfCountry: (countryCode: String) -> Unit) {
 @Preview(name = "Dark Mode", uiMode = UI_MODE_NIGHT_YES)
 @Composable
 fun PreviewCountry() {
-    Country(Country("", "India", "in"), {})
+    Country(Country("India", "en", "in"), {})
 }
 
 
