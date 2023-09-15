@@ -15,17 +15,9 @@ fun CountryScreenRoute(
     val countryViewModel: CountryViewModel =
         viewModel(factory = applicationComponent.getCountriesViewModelFactory())
 
-
-
-    val context = LocalContext.current
-    val countryJson = context.resources.openRawResource(R.raw.countries)
-        .bufferedReader().use { it.readText() }
-
-    countryViewModel.fetchAllCountries(countryJson)
-
     val uiStateCountry = countryViewModel.uiState.collectAsState().value
 
-    val onClickOfRetry: () -> Unit = { countryViewModel.fetchAllCountries(countryJson) }
+    val onClickOfRetry: () -> Unit = { countryViewModel.fetchAllCountries() }
 
     CountryScreen(
         uiStateCountry = uiStateCountry,

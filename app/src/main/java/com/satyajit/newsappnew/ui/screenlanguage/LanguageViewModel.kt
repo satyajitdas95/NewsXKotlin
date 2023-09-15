@@ -10,6 +10,7 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.flowOn
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -20,14 +21,19 @@ class LanguageViewModel @Inject constructor(private val languageRepository: Lang
 
     val uiStateFlow: StateFlow<UiState<List<LanguageModel>>> = _uiStateFlow.asStateFlow()
 
+    init {
+        fetchAllLanguage()
+    }
 
-    fun fetchAllLanguage(allLanguageJSon:String) {
+    fun fetchAllLanguage() {
         viewModelScope.launch(Dispatchers.IO) {
-            languageRepository.getAllLanguages(allLanguageJSon).catch {
-                _uiStateFlow.value = UiState.Error(it.toString())
-            }.collect {
-                _uiStateFlow.value = UiState.Success(it)
-            }
+            languageRepository.getAllLanguages()
+                .flowOn(Dispatchers.IO)
+                .catch {
+                    _uiStateFlow.value = UiState.Error(it.toString())
+                }.collect {
+                    _uiStateFlow.value = UiState.Success(it)
+                }
         }
     }
 

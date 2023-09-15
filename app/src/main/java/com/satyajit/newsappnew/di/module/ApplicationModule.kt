@@ -3,6 +3,7 @@ package com.satyajit.newsappnew.di.module
 import android.content.Context
 import com.satyajit.newsappnew.NewsApp
 import com.satyajit.newsappnew.data.api.NetworkService
+import com.satyajit.newsappnew.data.local.jsonparser.JsonProvider
 import com.satyajit.newsappnew.data.repository.CountryRepository
 import com.satyajit.newsappnew.data.repository.LanguageRepository
 import com.satyajit.newsappnew.data.repository.NewsRepository
@@ -58,6 +59,10 @@ class ApplicationModule(private val application: NewsApp) {
             .build()
             .create(NetworkService::class.java)
     }
+
+    @Singleton
+    @Provides
+    fun provideJsonReader(): JsonProvider = JsonProvider(this.application)
 
     @Provides
     @Singleton

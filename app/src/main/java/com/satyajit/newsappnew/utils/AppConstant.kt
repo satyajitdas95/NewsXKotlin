@@ -1,11 +1,10 @@
 package com.satyajit.newsappnew.utils
 
-import com.satyajit.newsappnew.BuildConfig
 
 
 object AppConstant {
 
-    const val API_KEY = BuildConfig.API_KEY
+    const val API_KEY = "73c638123fa94861aece4ba3262ddada"
     const val COUNTRY = "in"
 
 }

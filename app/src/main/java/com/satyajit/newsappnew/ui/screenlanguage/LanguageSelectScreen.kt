@@ -1,7 +1,11 @@
+@file:OptIn(ExperimentalFoundationApi::class)
+
 package com.satyajit.newsappnew.ui.screenlanguage
 
 import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
+import androidx.compose.animation.core.tween
+import androidx.compose.foundation.ExperimentalFoundationApi
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -58,7 +62,9 @@ fun LanguageScreen(
                     items(
                         items = uiStateLanguage.data,
                         key = { language -> language.languageCode }) { language ->
-                        LanguageItem(language, onClickOfLanguage)
+                        Column(Modifier.animateItemPlacement(tween(3000))) {
+                            LanguageItem(language, onClickOfLanguage)
+                        }
                     }
                 }
             }

@@ -14,6 +14,7 @@ import kotlinx.coroutines.launch
 import com.satyajit.newsappnew.ui.base.UiState
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.flowOn
 
 class CountryViewModel(private val countryRepository: CountryRepository) : ViewModel() {
 
@@ -21,9 +22,14 @@ class CountryViewModel(private val countryRepository: CountryRepository) : ViewM
 
     val uiState: StateFlow<UiState<List<Country>>> = _uiState.asStateFlow()
 
-    fun fetchAllCountries(countryJson: String) {
-        viewModelScope.launch(Dispatchers.IO) {
-            countryRepository.getAllCountries(countryJson)
+    init {
+        fetchAllCountries()
+    }
+
+    fun fetchAllCountries() {
+        viewModelScope.launch {
+            countryRepository.getAllCountries()
+                .flowOn(Dispatchers.IO)
                 .catch { e ->
                     _uiState.value = UiState.Error(e.toString())
                 }.collect {

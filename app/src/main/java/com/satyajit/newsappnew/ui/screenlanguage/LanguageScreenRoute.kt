@@ -16,12 +16,6 @@ fun LanguageScreenRoute(
 
     val languageViewModel : LanguageViewModel = viewModel(factory = applicationComponent.getLanguageViewModelFactory())
 
-    val context = LocalContext.current
-    val languageJson = context.resources.openRawResource(R.raw.languages)
-        .bufferedReader().use { it.readText() }
-
-    languageViewModel.fetchAllLanguage(languageJson)
-
     val uiStateLanguage = languageViewModel.uiStateFlow.collectAsState().value
 
     LanguageScreen(uiStateLanguage = uiStateLanguage, onClickOfLanguage = onClickOfLanguage)
