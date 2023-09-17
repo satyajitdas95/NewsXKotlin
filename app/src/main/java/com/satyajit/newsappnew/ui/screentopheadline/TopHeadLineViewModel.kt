@@ -2,6 +2,7 @@ package com.satyajit.newsappnew.ui.screentopheadline
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.satyajit.newsappnew.data.local.db.entity.TopHeadlineDb
 import com.satyajit.newsappnew.data.model.Article
 import com.satyajit.newsappnew.data.repository.NewsRepository
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -15,9 +16,9 @@ import kotlinx.coroutines.flow.catch
 
 class TopHeadLineViewModel(private val newsRepository: NewsRepository) : ViewModel() {
 
-    private val _uiState = MutableStateFlow<UiState<List<Article>>>(UiState.Loading)
+    private val _uiState = MutableStateFlow<UiState<List<TopHeadlineDb>>>(UiState.Loading)
 
-    val uiState: StateFlow<UiState<List<Article>>> = _uiState.asStateFlow()
+    val uiState: StateFlow<UiState<List<TopHeadlineDb>>> = _uiState.asStateFlow()
 
     init {
         fetchNews(AppConstant.COUNTRY)

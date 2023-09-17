@@ -10,4 +10,7 @@ data class TopHeadlinesResponse(
     val totalResults: Int = 0,
     @SerializedName("articles")
     val articles: List<Article> = ArrayList(),
+
+
+
 )

@@ -3,6 +3,7 @@ package com.satyajit.newsappnew.di.component
 import android.content.Context
 import com.satyajit.newsappnew.NewsApp
 import com.satyajit.newsappnew.data.api.NetworkService
+import com.satyajit.newsappnew.data.local.db.NewsAppDb
 import com.satyajit.newsappnew.di.ApplicationContext
 import com.satyajit.newsappnew.di.module.ApplicationModule
 import com.satyajit.newsappnew.ui.base.ViewModelProviderFactory
@@ -26,12 +27,19 @@ interface ApplicationComponent {
 
     fun getNetworkService(): NetworkService
 
-    fun getTopHeadlineViewModelFactory() : ViewModelProviderFactory<TopHeadLineViewModel>
-    fun getSpecificNewsViewModelFactory() : ViewModelProviderFactory<SpecificNewsViewModel>
-    fun getSourcesViewModelFactory() : ViewModelProviderFactory<SourcesViewModel>
-    fun getSearchViewModelFactory() : ViewModelProviderFactory<SearchViewModel>
-    fun getCountriesViewModelFactory() : ViewModelProviderFactory<CountryViewModel>
-    fun getLanguageViewModelFactory() : ViewModelProviderFactory<LanguageViewModel>
+    fun getDatabase(): NewsAppDb
+
+    fun getTopHeadlineViewModelFactory(): ViewModelProviderFactory<TopHeadLineViewModel>
+
+    fun getSpecificNewsViewModelFactory(): ViewModelProviderFactory<SpecificNewsViewModel>
+
+    fun getSourcesViewModelFactory(): ViewModelProviderFactory<SourcesViewModel>
+
+    fun getSearchViewModelFactory(): ViewModelProviderFactory<SearchViewModel>
+
+    fun getCountriesViewModelFactory(): ViewModelProviderFactory<CountryViewModel>
+
+    fun getLanguageViewModelFactory(): ViewModelProviderFactory<LanguageViewModel>
 
 
 }
