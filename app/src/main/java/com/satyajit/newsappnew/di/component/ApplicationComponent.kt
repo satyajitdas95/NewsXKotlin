@@ -13,6 +13,7 @@ import com.satyajit.newsappnew.ui.screensearch.SearchViewModel
 import com.satyajit.newsappnew.ui.screensource.SourcesViewModel
 import com.satyajit.newsappnew.ui.screenspecificnewslist.SpecificNewsViewModel
 import com.satyajit.newsappnew.ui.screentopheadline.TopHeadLineViewModel
+import com.satyajit.newsappnew.utils.network.NetworkHelper
 import dagger.Component
 import javax.inject.Singleton
 
@@ -28,6 +29,8 @@ interface ApplicationComponent {
     fun getNetworkService(): NetworkService
 
     fun getDatabase(): NewsAppDb
+
+    fun getNetworkHelper () : NetworkHelper
 
     fun getTopHeadlineViewModelFactory(): ViewModelProviderFactory<TopHeadLineViewModel>
 

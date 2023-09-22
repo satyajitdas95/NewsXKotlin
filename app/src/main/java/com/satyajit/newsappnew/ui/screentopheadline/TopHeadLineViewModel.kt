@@ -11,10 +11,14 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import com.satyajit.newsappnew.ui.base.UiState
 import com.satyajit.newsappnew.utils.AppConstant
+import com.satyajit.newsappnew.utils.network.NetworkHelper
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.catch
 
-class TopHeadLineViewModel(private val newsRepository: NewsRepository) : ViewModel() {
+class TopHeadLineViewModel(
+    private val networkHelper: NetworkHelper,
+    private val newsRepository: NewsRepository
+) : ViewModel() {
 
     private val _uiState = MutableStateFlow<UiState<List<TopHeadlineDb>>>(UiState.Loading)
 
@@ -24,14 +28,16 @@ class TopHeadLineViewModel(private val newsRepository: NewsRepository) : ViewMod
         fetchNews(AppConstant.COUNTRY)
     }
 
-    fun fetchNews(countryCode:String) {
+    fun fetchNews(countryCode: String) {
         viewModelScope.launch(Dispatchers.IO) {
-            newsRepository.getTopHeadlines(countryCode)
-                .catch { e ->
-                    _uiState.value = UiState.Error(e.toString())
-                }.collect {
-                    _uiState.value = UiState.Success(it)
-                }
+            if (networkHelper.getIfConnected()) {
+                newsRepository.getTopHeadlines(countryCode)
+                    .catch { e ->
+                        _uiState.value = UiState.Error(e.toString())
+                    }.collect {
+                        _uiState.value = UiState.Success(it)
+                    }
+            }
         }
     }
 

@@ -20,6 +20,8 @@ import com.satyajit.newsappnew.ui.screensearch.SearchViewModel
 import com.satyajit.newsappnew.ui.screensource.SourcesViewModel
 import com.satyajit.newsappnew.ui.screenspecificnewslist.SpecificNewsViewModel
 import com.satyajit.newsappnew.ui.screentopheadline.TopHeadLineViewModel
+import com.satyajit.newsappnew.utils.network.NetworkHelper
+import com.satyajit.newsappnew.utils.network.NetworkHelperImpl
 import dagger.Module
 import dagger.Provides
 import okhttp3.OkHttpClient
@@ -44,6 +46,12 @@ class ApplicationModule(private val application: NewsApp) {
 
     @Provides
     fun provideDbName(): String = "NewsAppDb"
+
+    @Singleton
+    @Provides
+    fun provideNetworkHelperImpl(): NetworkHelper {
+        return NetworkHelperImpl(this.application)
+    }
 
     @Provides
     @Singleton
@@ -86,9 +94,9 @@ class ApplicationModule(private val application: NewsApp) {
     }
 
     @Provides
-    fun provideTopHeadLinesViewModelFactory(newsRepository: NewsRepository): ViewModelProviderFactory<TopHeadLineViewModel> {
+    fun provideTopHeadLinesViewModelFactory(networkHelper: NetworkHelper,newsRepository: NewsRepository): ViewModelProviderFactory<TopHeadLineViewModel> {
         return ViewModelProviderFactory(TopHeadLineViewModel::class) {
-            TopHeadLineViewModel(newsRepository)
+            TopHeadLineViewModel(networkHelper,newsRepository)
         }
     }
 

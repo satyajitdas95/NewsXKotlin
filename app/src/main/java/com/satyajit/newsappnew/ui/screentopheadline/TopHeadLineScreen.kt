@@ -2,7 +2,9 @@ package com.satyajit.newsappnew.ui.screentopheadline
 
 import android.content.res.Configuration.UI_MODE_NIGHT_NO
 import android.content.res.Configuration.UI_MODE_NIGHT_YES
+import androidx.compose.animation.core.TweenSpec
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -15,6 +17,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Home
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CardElevation
@@ -24,7 +28,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ImageBitmap
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.graphics.lerp
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.stringResource
@@ -33,6 +41,7 @@ import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import com.satyajit.newsappnew.R
+import com.satyajit.newsappnew.data.local.db.entity.TopHeadlineDb
 import com.satyajit.newsappnew.data.model.Article
 import com.satyajit.newsappnew.data.model.Sources
 import com.satyajit.newsappnew.ui.base.UiState
@@ -42,10 +51,11 @@ import com.satyajit.newsappnew.ui.generic.ShowLoadingGlobe
 import com.satyajit.newsappnew.ui.screensearch.SearchViewOnly
 import com.satyajit.newsappnew.ui.theme.NewsAppNewTheme
 import com.satyajit.newsappnew.ui.theme.slightlyDeemphasizedAlpha
+import java.lang.Math.random
 
 @Composable
 fun TopHeadlineScreen(
-    uiState: UiState<List<Article>>,
+    uiState: UiState<List<TopHeadlineDb>>,
     onClickOfNewsITem: (newsUrl: String) -> Unit,
     onClickOfRetry: () -> Unit,
     onClickOfSearch: () -> Unit,
@@ -82,9 +92,12 @@ fun TopHeadlineScreen(
                     }
                 }
             }
+
         }
+
     }
 }
+
 
 @Preview(showBackground = true, name = "Ui mode Dark", uiMode = UI_MODE_NIGHT_YES)
 @Preview(showBackground = true, name = "Ui mode Light", uiMode = UI_MODE_NIGHT_NO)
@@ -93,11 +106,11 @@ fun PreviewArticle() {
     NewsAppNewTheme {
         Surface {
             NewsArticle(
-                Article(
+                TopHeadlineDb(
                     title = "This is A Test Titel",
                     description = "This is a description title to test if it fits into picture",
                     source = Sources(name = "BBC"),
-                    imageUrl = "https://images.pexels.com/photos/1535907/pexels-photo-1535907.jpeg?cs=srgb&dl=pexels-karyme-fran%C3%A7a-1535907.jpg&fm=jpg",
+                    imgUrl = "https://images.pexels.com/photos/1535907/pexels-photo-1535907.jpeg?cs=srgb&dl=pexels-karyme-fran%C3%A7a-1535907.jpg&fm=jpg",
                     url = "www.google.come"
                 )
             ) {}
@@ -107,7 +120,7 @@ fun PreviewArticle() {
 
 
 @Composable
-fun NewsArticle(article: Article, onClickOfNewsITem: (newsUrl: String) -> Unit) {
+fun NewsArticle(article: TopHeadlineDb, onClickOfNewsITem: (newsUrl: String) -> Unit) {
     Column(
         modifier = Modifier
             .fillMaxWidth()
@@ -119,7 +132,7 @@ fun NewsArticle(article: Article, onClickOfNewsITem: (newsUrl: String) -> Unit) 
     ) {
 
         AsyncImage(
-            model = ImageRequest.Builder(LocalContext.current).data(article.imageUrl)
+            model = ImageRequest.Builder(LocalContext.current).data(article.imgUrl)
                 .crossfade(true).build(),
             contentDescription = "News Thumbnail",
             contentScale = ContentScale.Crop,

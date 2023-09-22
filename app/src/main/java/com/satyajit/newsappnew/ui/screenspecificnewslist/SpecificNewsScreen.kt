@@ -14,6 +14,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.satyajit.newsappnew.R
+import com.satyajit.newsappnew.data.local.db.entity.TopHeadlineDb
 import com.satyajit.newsappnew.data.model.Article
 import com.satyajit.newsappnew.ui.base.UiState
 import com.satyajit.newsappnew.ui.generic.ShowErrorMessageForNoData
@@ -25,7 +26,7 @@ import com.satyajit.newsappnew.ui.screentopheadline.NewsArticle
 @Composable
 fun SpecificNewsScreen(
     title: String = "",
-    uiState: UiState<List<Article>>,
+    uiState: UiState<List<TopHeadlineDb>>,
     onClickOfNewsITem: (newsUrl: String) -> Unit,
     onClickOfRetry: () -> Unit,
     onBackPressed: () -> Unit

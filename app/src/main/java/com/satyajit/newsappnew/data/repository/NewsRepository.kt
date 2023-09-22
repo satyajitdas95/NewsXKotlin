@@ -8,6 +8,9 @@ import com.satyajit.newsappnew.data.local.db.NewsAppDb
 import com.satyajit.newsappnew.data.local.db.entity.TopHeadlineDb
 import com.satyajit.newsappnew.data.local.db.typeconverters.NetworkResponseToDbEntityConverter
 import com.satyajit.newsappnew.data.model.Article
+import com.satyajit.newsappnew.utils.network.NetworkHelper
+import kotlinx.coroutines.flow.catch
+import kotlinx.coroutines.flow.emptyFlow
 import kotlinx.coroutines.flow.flatMapConcat
 import kotlinx.coroutines.flow.flowOf
 import javax.inject.Inject
@@ -40,18 +43,20 @@ class NewsRepository @Inject constructor(
                 }
             }
         }.flatMapConcat {
-            return@flatMapConcat flowOf(
-                databaseService.topHeadlineDAO().getAllTopHeadLines()
-            )
+            return@flatMapConcat flow {
+                emit(databaseService.topHeadlineDAO().getAllTopHeadLines())
+            }
         }
     }
 
-    fun getTopHeadlinesBySources(sources: String): Flow<List<Article>> {
-        return flow {
-            emit(networkService.getTopHeadlinesBySources(sources))
-        }.map {
-            it.articles.filter { article -> article.title != null && article.title != "[Removed]" }
-        }
+    fun getTopHeadlinesBySources(sources: String): Flow<List<TopHeadlineDb>> {
+//        return flow {
+//            emit(networkService.getTopHeadlinesBySources(sources))
+//        }.map {
+//            it.articles.filter { article -> article.title != null && article.title != "[Removed]" }
+//        }
+
+        return emptyFlow()
     }
 
 }
