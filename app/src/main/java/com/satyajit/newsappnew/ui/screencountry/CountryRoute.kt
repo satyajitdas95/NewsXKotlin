@@ -9,11 +9,12 @@ import com.satyajit.newsappnew.di.component.ApplicationComponent
 
 @Composable
 fun CountryScreenRoute(
-    applicationComponent: ApplicationComponent, onClickOfCountry: (countryCode: String) -> Unit
+    onClickOfCountry: (countryCode: String) -> Unit, countryViewModel:CountryViewModel
 ) {
 
-    val countryViewModel: CountryViewModel =
-        viewModel(factory = applicationComponent.getCountriesViewModelFactory())
+//    val countryViewModel: CountryViewModel =
+//        viewModel(factory = applicationComponent.getCountriesViewModelFactory())
+
 
     val uiStateCountry = countryViewModel.uiState.collectAsState().value
 

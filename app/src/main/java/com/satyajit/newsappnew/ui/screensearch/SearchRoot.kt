@@ -13,6 +13,7 @@ fun SearchRoot(
     onNavigateBack: () -> Unit,
 
     ) {
+
     val viewModel: SearchViewModel =
         viewModel(factory = applicationComponent.getSearchViewModelFactory())
 

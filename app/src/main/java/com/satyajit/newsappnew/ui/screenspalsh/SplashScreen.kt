@@ -34,6 +34,7 @@ fun SplashScreen(onSplashCompleted: () -> Unit) {
         delay(delayDuration)
         onSplashCompleted.invoke()
     }
+
     Box(
         modifier = Modifier
             .fillMaxWidth()

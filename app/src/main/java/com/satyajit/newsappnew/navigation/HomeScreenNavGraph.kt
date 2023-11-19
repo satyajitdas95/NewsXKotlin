@@ -4,6 +4,7 @@ import androidx.compose.foundation.lazy.LazyListState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.platform.LocalContext
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -11,6 +12,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.navArgument
 import com.satyajit.newsappnew.di.component.ApplicationComponent
 import com.satyajit.newsappnew.ui.screencountry.CountryScreenRoute
+import com.satyajit.newsappnew.ui.screencountry.CountryViewModel
 import com.satyajit.newsappnew.ui.screenlanguage.LanguageScreenRoute
 import com.satyajit.newsappnew.ui.screennewsdetails.NavigateToNewsDetails
 import com.satyajit.newsappnew.ui.screensearch.SearchRoot
@@ -33,7 +35,7 @@ fun HomeScreenNavGraph(
             TopHeadLinesRoute(
                 onClickOfNewsITem = { newslink -> navController.navigate("newsDetails/?url=$newslink") },
                 onClickOfSearch = onNavigateSearch,
-                applicationComponent,scrollState
+                applicationComponent, scrollState
             )
         }
 
@@ -57,8 +59,13 @@ fun HomeScreenNavGraph(
         }
 
         composable(HomeNavGraph.Country.route) {
-            CountryScreenRoute(applicationComponent = applicationComponent,
-                onClickOfCountry = { countryCode -> navController.navigate("specificNewsList/?countryCode=$countryCode") })
+            val countryViewModel: CountryViewModel =
+                viewModel(factory = applicationComponent.getCountriesViewModelFactory())
+
+            CountryScreenRoute(
+                onClickOfCountry = { countryCode -> navController.navigate("specificNewsList/?countryCode=$countryCode") },
+                countryViewModel
+            )
         }
 
         composable(HomeNavGraph.Language.route) {
@@ -116,10 +123,7 @@ fun HomeScreenNavGraph(
                 applicationComponent = applicationComponent
             )
         }
-
-
     }
-
 }
 
 sealed class HomeNavGraph(val route: String) {

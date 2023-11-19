@@ -72,6 +72,7 @@ class ApplicationModule(private val application: NewsApp) {
             .create(NetworkService::class.java)
     }
 
+
     @Provides
     @Singleton
     fun provideAppDb(databaseName: String): NewsAppDb {
