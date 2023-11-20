@@ -3,13 +3,14 @@
 ## About
 A Simple News Application which shows news articles all around the world with search feature. 
 
+
 <p align="center">
-<img src="https://github.com/satyajitdas95/NewsXKotlin/assets/24476245/dcd05867-db25-41a1-8b2b-4947c4535670.jpeg" height="500" width="250">
-<img src="https://github.com/satyajitdas95/NewsXKotlin/assets/24476245/9693f8d1-09f8-4b6c-a6d9-a0a3d552bca0.jpeg" height="500" width="250">
-<img src="https://github.com/satyajitdas95/NewsXKotlin/assets/24476245/d3b5bd4b-f329-4cbb-8808-0dc5bc0e7c8e.jpeg" height="500" width="250">
-<img src="https://github.com/satyajitdas95/NewsXKotlin/assets/24476245/86496d01-80e1-4591-a2b8-fe2db44e52a8.jpeg" height="500" width="250">
-<img src="https://github.com/satyajitdas95/NewsXKotlin/assets/24476245/60324bfb-42f7-44be-9d9e-c35969803305.jpeg" height="500" width="250">
-<img src="https://github.com/satyajitdas95/NewsXKotlin/assets/24476245/33e1889c-ba2c-42b8-b2df-348cdf0b2f44.jpeg" height="500" width="250">
+<img src="https://github.com/satyajitdas95/NewsXKotlin/assets/24476245/f42500ee-bc68-4f91-abd2-bff33797aec8.jpeg" height="500" width="250">
+<img src="https://github.com/satyajitdas95/NewsXKotlin/assets/24476245/e9127f1e-51a7-4ddf-aea0-46dac3f5b7ff.jpeg" height="500" width="250">
+<img src="https://github.com/satyajitdas95/NewsXKotlin/assets/24476245/e1a8bd0e-3fab-430c-b19d-8118b74c8233.jpeg" height="500" width="250">
+<img src="https://github.com/satyajitdas95/NewsXKotlin/assets/24476245/284db85f-c107-4c47-b8db-839330d233eb.jpeg" height="500" width="250">
+<img src="https://github.com/satyajitdas95/NewsXKotlin/assets/24476245/6add65f6-1c8e-4ded-8822-9d63ffeac033.jpeg" height="500" width="250">
+<img src="https://github.com/satyajitdas95/NewsXKotlin/assets/24476245/a729aad3-8420-4a13-b857-3afefa47cb13.jpeg" height="500" width="250">
 </p>
 
 
